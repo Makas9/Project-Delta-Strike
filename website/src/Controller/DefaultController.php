@@ -19,6 +19,16 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/register", name="register")
+     */
+    public function register()
+    {
+        return $this->render('pages/register.html.twig', [
+            'title' => 'Register',
+        ]);
+    }
+
+    /**
      * @Route("/hub", name="hub")
      */
     public function hub()
@@ -60,5 +70,15 @@ class DefaultController extends AbstractController
     public function items()
     {
         return $this->render('pages/items.html.twig');
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout()
+    {
+        return $this->render('pages/index.html.twig', [
+            'title' => 'Homepage',
+        ]);
     }
 }
