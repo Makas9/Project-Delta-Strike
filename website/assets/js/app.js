@@ -7,8 +7,47 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
+const $ = require('./jquery.js');
+global.$ = global.jQuery = $;
+require('./materialize.min.js');
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
+$(document).ready(function() {
+   M.AutoInit();
+});
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+/* LOADER */
+
+var documentTitle = document.title;
+
+function loadPage(page){
+  $("main").load(page);
+}
+
+function prepareNewPage(title){
+  document.title = documentTitle+" - "+title;
+  setTimeout(function(){
+    M.AutoInit();
+  }, 1000);
+}
+
+/* SIDENAV */
+
+$('a[href="#trading"]').click(function(){
+  loadPage("/trading");
+  prepareNewPage("Trading");
+});
+
+$('a[href="#achievements"]').click(function(){
+  loadPage("/achievements");
+  prepareNewPage("Achievements");
+});
+
+$('a[href="#settings"]').click(function(){
+  loadPage("/settings");
+  prepareNewPage("Settings");
+});
+
+$('a[href="#items"]').click(function(){
+  loadPage("/items");
+  prepareNewPage("Items");
+});

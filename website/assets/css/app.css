@@ -1,3 +1,66 @@
 body {
-    background-color: lightgray;
+    background-color: white;
+}
+
+body.welcome {
+  background-image: url('../images/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+#container {
+  width: 100%;
+  flex-grow: 1;
+}
+
+#loader {
+  height: 50%;
+  width: 50%;
+  background-color: white;
+  margin: 0px auto;
+}
+
+#main {
+  height: 100%;
+  width: 100%;
+}
+
+#card {
+  background-color: white;
+  min-width: 400px;
+  max-width: 500px;
+}
+
+#logo {
+  margin-top: 5px;
+}
+
+header, main, footer {
+      padding-left: 300px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+
+    ul.sidenav.sidenav-fixed {
+        overflow: hidden;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border-right: 1px solid rgba(0,0,0,0.14);
+      }
+
+      .sidenav .user-view {
+          margin-bottom: 0px;
+      }
+
+      .sidenav .divider {
+    margin: 0px;
+}
+
+#header {
+  border-bottom: 1px solid rgba(0,0,0,0.14);
 }
