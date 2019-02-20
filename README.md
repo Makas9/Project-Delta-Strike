@@ -20,5 +20,5 @@ Add additional notes about how to deploy this on a live system
 
 * **Martynas Didžiokas** - *Project manager, Unity developer* - [Mart13s](https://github.com/Mart13s)
 * **Arnas Makavičius** - *Full stack developer* - [Makas9](https://github.com/Makas9)
-* **Kostas Budrevičius** - *Game designer, Unity developer* - [K0ST4AS](https://github.com/K0ST4S)
+* **Kostas Budrevičius** - *Game designer, Unity developer* - [K0ST4S](https://github.com/K0ST4S)
 * **Ričardas Serneckas** - *Graphics designer, Unity developer* - [ricardas98](https://github.com/ricardas98)
