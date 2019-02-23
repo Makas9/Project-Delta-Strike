@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Form\Registration;
 use App\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\DBAL\Driver\Connection;
 
-class RegistrationController extends Controller
+class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="register")
@@ -36,12 +38,12 @@ class RegistrationController extends Controller
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('replace_with_some_route');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render(
             'pages/register.html.twig',
-            array('form' => $form->createView())
+            array('title' => 'Homepage', 'form' => $form->createView())
         );
     }
 }

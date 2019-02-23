@@ -1,14 +1,39 @@
+{% extends 'base.html.twig' %}
 
+{% block title %} {{ title }} {% endblock %}
 
 {% block body_class %}welcome{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
-
-    <button type="submit">Register!</button>
-    {{ form_end(form) }}
+    <div id="main" class="valign-wrapper center-align">
+        <div id="card" class="row z-depth-5">
+            <div class="row">
+                {{ form_start(form) }}
+                <div class="row" style="margin: 0px;">
+                    <div class="input-field col s12">
+                        {{ form_row(form.email) }}
+                    </div>
+                </div>
+                <div class="row" style="margin: 0px;">
+                    <div class="input-field col s12">
+                        {{ form_row(form.username) }}
+                    </div>
+                </div>
+                <div class="row" style="margin: 0px;">
+                    <div class="input-field col s12">
+                        {{ form_row(form.plainPassword.first) }}
+                    </div>
+                </div>
+                <div class="row" style="margin: 0px;">
+                    <div class="input-field col s12">
+                        {{ form_row(form.plainPassword.second) }}
+                    </div>
+                </div>
+                <button type="submit" class="waves-effect waves-light btn">Register</button>
+                {{ form_end(form) }}
+                <br />
+                <a href="{{ asset('/') }}">Back</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
