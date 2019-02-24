@@ -9,24 +9,19 @@ use Doctrine\DBAL\Driver\Connection;
 
 class DefaultController extends AbstractController
 {
+
+
+
     /**
      * @Route("/", name="index")
      */
     public function index()
     {
-        return $this->render('pages/index.html.twig', [
-            'title' => 'Homepage',
-        ]);
-    }
+        if(!$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY')){
+            return $this->redirectToRoute('hub');
+        }
 
-    /**
-     * @Route("/register", name="register")
-     */
-    public function register()
-    {
-        return $this->render('pages/register.html.twig', [
-            'title' => 'Register',
-        ]);
+        return $this->redirectToRoute('app_login');
     }
 
     /**
@@ -34,10 +29,13 @@ class DefaultController extends AbstractController
      */
     public function hub()
     {
+        $user = $this->getUser();
+
         return $this->render('pages/hub.html.twig', [
             'title' => 'Hub',
-            'username' => '@username',
-            'level' => '1 level',
+            'avatar' => $user->getAvatar(),
+            'username' => '@'.$user->getUsername(),
+            'level' => $user->getLevel().' level',
         ]);
     }
 
@@ -74,12 +72,10 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="logout")
+     * @Route("/logout", name="app_logout")
      */
     public function logout()
     {
-        return $this->render('pages/index.html.twig', [
-            'title' => 'Homepage',
-        ]);
+        return $this->redirectToRoute('index');
     }
 }
