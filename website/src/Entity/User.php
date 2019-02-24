@@ -53,6 +53,16 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $avatar;
+
+    /**
+     * @ORM\Column(type="integer", options={"default": 1})
+     */
+    private $level;
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
@@ -114,5 +124,33 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getAvatar(): ?string
+    {
+        if($this->avatar === null) {
+            return "build/images/unknown-avatar.svg";
+        }
+
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): self
+    {
+        $this->level = $level;
+
+        return $this;
     }
 }
