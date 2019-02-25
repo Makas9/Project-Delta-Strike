@@ -54,14 +54,14 @@ class User implements UserInterface
     private $roles;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
      */
     private $avatar;
 
     /**
      * @ORM\Column(type="integer", options={"default": 1})
      */
-    private $level;
+    private $level = 1;
 
     public function __construct()
     {

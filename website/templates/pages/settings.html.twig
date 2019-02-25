@@ -12,32 +12,35 @@
         <div class="col s12 m8 offset-m1 xl7 offset-xl1">
             <div class="row section">
                 <div class="input-field col s12">
-                    <input disabled value="someone@gmail.com" id="email" type="text" class="validate">
+                    <input disabled value="{{ email }}" id="email" type="text" class="validate">
                     <span class="helper-text">Email</span>
                 </div>
                 <div class="col s12 divider"></div>
                 <div class="input-field col s12">
                     <h6>Change Password</h6>
-                    <form action="#" class="center-align" style="margin: 0px;">
+                    <div class="center-align" style="margin: 0px;">
                         <input Placeholder="Password..." id="password" type="password" class="validate">
                         <input Placeholder="Repeat Password..." id="passwordr" type="password" class="validate">
                         <a class="waves-effect waves-light btn">Change</a>
-                    </form>
+                    </div>
                 </div>
                 <div class="col s12 divider"></div>
                 <div class="input-field col s12">
                     <h6>Change Avatar</h6>
-                    <form action="#">
+                    <div>
+                        {{ form_start(form) }}
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>File</span>
-                                <input type="file">
+                                {{ form_row(form.avatar) }}
                             </div>
                             <div class="file-path-wrapper">
                                 <input Placeholder="Select your avatar..." class="file-path validate" type="text">
                             </div>
+                            <button type="submit" class="waves-effect waves-light btn">Upload</button>
                         </div>
-                    </form>
+                        {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
         </div>
