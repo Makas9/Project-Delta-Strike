@@ -132,7 +132,7 @@ class User implements UserInterface
             return "build/images/unknown-avatar.svg";
         }
 
-        return $this->avatar;
+        return '/uploads/avatars/'.$this->avatar;
     }
 
     public function setAvatar(?string $avatar): self

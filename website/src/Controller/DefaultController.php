@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
 
         return $this->render('pages/hub.html.twig', [
             'title' => 'Hub',
-            'avatar' => '/uploads/avatars/'.$user->getAvatar(),
+            'avatar' => $user->getAvatar(),
             'username' => '@'.$user->getUsername(),
             'level' => $user->getLevel().' level',
         ]);
