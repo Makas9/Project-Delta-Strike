@@ -18,36 +18,33 @@ $(document).ready(function() {
 /* LOADER */
 
 var documentTitle = document.title;
+var loading = false;
 
-function loadPage(page){
-  $("main").load(page);
-}
-
-function prepareNewPage(title){
-  document.title = documentTitle+" - "+title;
-  setTimeout(function(){
-    M.AutoInit();
-  }, 1000);
+function loadPage(page, title){
+  if(loading == false) {
+    loading = true;
+    $("main").load(page, function () {
+      document.title = documentTitle + " - " + title;
+      M.AutoInit();
+      loading = false;
+    });
+  }
 }
 
 /* SIDENAV */
 
 $('a[href="#trading"]').click(function(){
-  loadPage("/trading");
-  prepareNewPage("Trading");
+  loadPage("/trading", "Trading");
 });
 
 $('a[href="#achievements"]').click(function(){
-  loadPage("/achievements");
-  prepareNewPage("Achievements");
+  loadPage("/achievements", "Achievements");
 });
 
 $('a[href="#settings"]').click(function(){
-  loadPage("/settings");
-  prepareNewPage("Settings");
+  loadPage("/settings", "Settings");
 });
 
 $('a[href="#items"]').click(function(){
-  loadPage("/items");
-  prepareNewPage("Items");
+  loadPage("/items", "Items");
 });
