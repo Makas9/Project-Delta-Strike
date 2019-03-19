@@ -1,6 +1,6 @@
 # Project-Delta-Strike
 
-One Paragraph of project description goes here
+Unity based game with WEB functionality (Symfony Framework) for login, registration, trading and tracking achievements. 
 
 ## Getting Started
 
