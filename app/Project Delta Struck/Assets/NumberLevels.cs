@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NumberLevels : MonoBehaviour {
-
     void Awake()
     {
         var buttons = GetComponentsInChildren<Text>();

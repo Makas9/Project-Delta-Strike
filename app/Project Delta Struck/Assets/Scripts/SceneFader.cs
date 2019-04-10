@@ -5,6 +5,7 @@ using System.Collections;
 
 public class SceneFader : MonoBehaviour {
     public static SceneFader Instance;
+
 	public Image img;
 	public AnimationCurve curve;
 
@@ -25,8 +26,7 @@ public class SceneFader : MonoBehaviour {
 
 	IEnumerator FadeIn ()
 	{
-		float t = 1f;
-
+        float t = curve.keys[curve.keys.Length - 1].value;
 		while (t > 0f)
 		{
 			t -= Time.deltaTime;
@@ -40,7 +40,7 @@ public class SceneFader : MonoBehaviour {
 	{
 		float t = 0f;
 
-		while (t < 1f)
+		while (t < curve.keys[curve.keys.Length-1].value)
 		{
 			t += Time.deltaTime;
 			float a = curve.Evaluate(t);

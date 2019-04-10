@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Gun", menuName = "Weapon/Gun")]
-public class GunSettings : ScriptableObject
+public class GunSettings : WeaponSettings
 {
     public string Name;
-    public float BulletDamage = 1f;
     public float BulletsPerSecond = 5f;
     public float Price = 100f;
     public float ReloadTime = 2f;
