@@ -6,12 +6,12 @@ using System.Linq;
 [System.Serializable]
 public class PlayerData
 {
-    public float CoinsEarned = 100f;
+    public float Money = 1000f;
     public int LevelReached = 1;
-    public string[] Granades;
-    public string[] Vests;
-    public GunData[] Guns;
-    public string[] Knives;
+    public GrenadeData[] Granades;
+    public string[]      Vests;
+    public string[]      Guns;
+    public string[]      Knives;
     public int VestsCount;
     public int GunsCount;
     public int KnivesCount;
@@ -20,13 +20,16 @@ public class PlayerData
     public string CurrentGun;
     public string CurrentKnife;
 
-    public GunData GetCurrentGunData()
+    public PlayerData(string CurrentVest, string CurrentGun, string CurrentKnife)
     {
-        foreach (GunData data in Guns)
-        {
-            if (data.Name == CurrentGun) return data;
-        }
-        throw new Exception("Gun data " + CurrentGun + " doesnt exist");
+        Vests  = new string[1];
+        Guns   = new string[1];
+        Knives = new string[1];
+        this.CurrentVest  = Vests [0] = CurrentVest;
+        this.CurrentGun   = Guns  [0] = CurrentGun;
+        this.CurrentKnife = Knives[0] = CurrentKnife;
+
+        Granades = new GrenadeData[0];
     }
 
     public void AddKnife(string Name)
@@ -45,19 +48,34 @@ public class PlayerData
 
     public void AddGranade(string Name)
     {
-        foreach (string Granade in Granades)
+        foreach (var Granade in Granades)
         {
-            if (Granade == Name)
+            if (Granade.Name == Name)
             {
-                throw new Exception("Knife " + Name + " is already bought");
+                Granade.Count++;
+                return;
             }
         }
 
-        AddToArray(Granades, Name);
+        AddToArray(Granades, new GrenadeData(Name, 1));
         SaveSystem.SavePlayer(this);
     }
 
-    public void AddVeste(string Name)
+    public void AddGun(string Name)
+    {
+        foreach (var Gun in Guns)
+        {
+            if (Gun == Name)
+            {
+                throw new Exception("Gun " + Name + " is already bought");
+            }
+        }
+
+        AddToArray(Guns, Name);
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void AddVest(string Name)
     {
         foreach (string Vest in Vests)
         {
@@ -71,10 +89,16 @@ public class PlayerData
         SaveSystem.SavePlayer(this);
     }
 
-    public string[] AddToArray(string[] array, string value)
+    public void AddToArray<T>(T[] array, T value)
     {
-        List<string> newArrayList = array.ToList();
+        if (array == null)
+        {
+            array = new T[1];
+            array[0] = value;
+            return;
+        }
+        List<T> newArrayList = array.ToList();
         newArrayList.Add(value);
-        return newArrayList.ToArray();
+        array = newArrayList.ToArray();
     }
 }

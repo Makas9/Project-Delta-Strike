@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 [System.Serializable]
-public class GunData
+public class GrenadeData
 {
     public string Name;
-    public int BulletsCount = 0;
+    public int Count;
 
-    public GunData(string Name, int BulletsCount)
+    public GrenadeData(string Name, int Count)
     {
         this.Name = Name;
-        this.BulletsCount = BulletsCount;
+        this.Count = Count;
     }
 }

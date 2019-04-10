@@ -7,21 +7,36 @@ using UnityEngine;
 public class Data : MonoBehaviour
 {
     public static Data Instance;
-    private GranadeSettings[] Granades;
-    private VestSettings[] Vests;
-    private GunSettings[] Guns;
-    private KnifeSettings[] Knives;
+    public GranadeSettings[] Granades;
+    public VestSettings[] Vests;
+    public GunSettings[] Guns;
+    public KnifeSettings[] Knives;
 
-    public string CurrentVest;
-    public string CurrentGun;
-    public string CurrentKnife;
-
+    [HideInInspector]
+    private PlayerData PlayerData;
     private void Awake()
     {
-        if (Instance != null) Destroy(gameObject);
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
+        PlayerData = SaveSystem.LoadPlayer();
     }
 
+    public string CurrentVest => PlayerData.CurrentVest;
+    public string CurrentGun => PlayerData.CurrentGun;
+    public string CurrentKnife => PlayerData.CurrentKnife;
+
+    public float Money
+    {
+        get => PlayerData.Money;
+        set => PlayerData.Money = value;
+    }
+
+    public void AddGrenade(string Name) => PlayerData.AddGranade(Name);
+    
     public GranadeSettings GetGranadeSettings(string Name)
     {
         foreach (GranadeSettings g in Granades)

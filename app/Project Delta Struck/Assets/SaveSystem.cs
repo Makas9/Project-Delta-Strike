@@ -45,7 +45,7 @@ public static class SaveSystem
         else
         {
             Debug.Log("Save file not found in " + playerDataPath);
-            PlayerData data = null;
+            PlayerData data = new PlayerData("Basic", "Basic", "Basic");
             SavePlayer(data);
             return data;
         }

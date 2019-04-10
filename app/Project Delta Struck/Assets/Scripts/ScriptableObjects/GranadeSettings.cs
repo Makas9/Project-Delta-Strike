@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Granade", menuName = "Weapon/Granade")]
 public class GranadeSettings : WeaponSettings
 {
-    public string Name;
+    [HideInInspector]
+    public string Name { get { return name; } }
     public float ExplosionRadius = 1f;
     public float Price = 100f;
     public float Weight = 1f;

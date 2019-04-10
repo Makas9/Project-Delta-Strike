@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Gun", menuName = "Weapon/Gun")]
 public class GunSettings : WeaponSettings
 {
-    public string Name;
-    public float BulletsPerSecond = 5f;
+    [HideInInspector]
+    public string Name { get { return name; } }
+    public int BulletsPerSecond = 5;
+    public int MagSize = 100;
     public float Price = 100f;
     public float ReloadTime = 2f;
     [TextArea(3, 10)]
