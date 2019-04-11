@@ -54,7 +54,7 @@ class User implements UserInterface
     private $roles;
 
     /**
-     * @ORM\Column(type="text", nullable=false)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $avatar;
 
@@ -69,6 +69,11 @@ class User implements UserInterface
     }
 
     // other properties and methods
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getEmail()
     {
