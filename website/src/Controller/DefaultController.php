@@ -8,6 +8,8 @@ use App\Form\UploadAvatar;
 use App\Form\Model\ChangeAvatar;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Entity\User;
+use App\Entity\Inventory;
+use App\Entity\Item;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\DBAL\Driver\Connection;
@@ -37,11 +39,16 @@ class DefaultController extends AbstractController
     {
         $user = $this->getUser();
 
+        $inventory = $this->getDoctrine()
+            ->getRepository(Inventory::class)
+            ->findBy(array('user' => $user->getId()));
+
         return $this->render('pages/hub.html.twig', [
             'title' => 'Hub',
             'avatar' => $user->getAvatar(),
             'username' => '@'.$user->getUsername(),
             'level' => $user->getLevel().' level',
+            'items' => count($inventory),
         ]);
     }
 
@@ -112,7 +119,18 @@ class DefaultController extends AbstractController
      */
     public function items()
     {
-        return $this->render('pages/items.html.twig');
+        $user = $this->getUser();
+        $inventory = $this->getDoctrine()
+            ->getRepository(Inventory::class)
+            ->findBy(array('user' => $user->getId()));
+        $items = $this->getDoctrine()
+            ->getRepository(Item::class)
+            ->findBy(array('id' => $inventory));
+
+        return $this->render('pages/items.html.twig', [
+            'count' => count($items),
+            'items' => $items,
+        ]);
     }
 
     /**
