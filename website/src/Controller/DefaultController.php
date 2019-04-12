@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Entity\User;
 use App\Entity\Inventory;
 use App\Entity\Item;
+use App\Entity\Trade;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\DBAL\Driver\Connection;
@@ -39,15 +40,25 @@ class DefaultController extends AbstractController
     {
         $user = $this->getUser();
 
+        $top = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(array(), array('level' => 'DESC'));
+
         $inventory = $this->getDoctrine()
             ->getRepository(Inventory::class)
             ->findBy(array('user' => $user->getId()));
+
+        $trades = $this->getDoctrine()
+            ->getRepository(Trade::class)
+            ->findBy(array('userTo' => $user->getId(), 'status' => 0));
 
         return $this->render('pages/hub.html.twig', [
             'title' => 'Hub',
             'avatar' => $user->getAvatar(),
             'username' => '@'.$user->getUsername(),
             'level' => $user->getLevel().' level',
+            'top' => $top,
+            'trades' => count($trades),
             'items' => count($inventory),
         ]);
     }
@@ -57,7 +68,28 @@ class DefaultController extends AbstractController
      */
     public function trading()
     {
-        return $this->render('pages/trading.html.twig');
+        $user = $this->getUser();
+
+        $active = $this->getDoctrine()
+            ->getRepository(Trade::class)
+            ->findBy(array('userTo' => $user->getId(), 'status' => 0));
+
+        $completed = $this->getDoctrine()
+            ->getRepository(Trade::class)
+            ->findBy(array('userTo' => $user->getId(), 'status' => array(1, 2)));
+
+        return $this->render('pages/trading.html.twig', [
+            'active' => $active,
+            'completed' => $completed,
+        ]);
+    }
+
+    /**
+     * @Route("/trade/{id}", name="trade")
+     */
+    public function trade()
+    {
+        return $this->render('pages/trade.html.twig');
     }
 
     /**

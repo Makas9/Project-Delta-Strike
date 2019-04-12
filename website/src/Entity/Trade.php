@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @ORM\Entity
  */
 class Trade
 {
+    // Active => 0; Completed => 1; Denied => 2;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -17,14 +19,14 @@ class Trade
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $usernameFrom;
+    private $userFrom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $usernameTo;
+    private $userTo;
 
     /**
      * @ORM\Column(type="array")
@@ -49,6 +51,30 @@ class Trade
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getFrom()
+    {
+        return $this->userFrom;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function statusToString(){
+        switch($this->status){
+            case 0:
+                return "Active";
+                break;
+            case 1:
+                return "Completed";
+                break;
+            case 2:
+                return "Denied";
+                break;
+        }
     }
 
     // ... getter and setter methods
