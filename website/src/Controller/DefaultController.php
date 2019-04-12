@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Entity\Inventory;
 use App\Entity\Item;
 use App\Entity\Trade;
+use App\Entity\Achievement;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\DBAL\Driver\Connection;
@@ -87,9 +88,18 @@ class DefaultController extends AbstractController
     /**
      * @Route("/trade/{id}", name="trade")
      */
-    public function trade()
+    public function trade($id)
     {
-        return $this->render('pages/trade.html.twig');
+        $user = $this->getUser();
+
+        $trade = $this->getDoctrine()
+            ->getRepository(Trade::class)
+            ->findBy(array('userTo' => $user->getId(), 'id' => $id, 'status' => 0));
+
+        return $this->render('pages/trade.html.twig', [
+            'title' => 'Trade Offer #'.$id,
+            'trade' => $trade,
+        ]);
     }
 
     /**
@@ -97,7 +107,16 @@ class DefaultController extends AbstractController
      */
     public function achievements()
     {
-        return $this->render('pages/achievements.html.twig');
+        $user = $this->getUser();
+
+        $achievements = $this->getDoctrine()
+            ->getRepository(Achievement::class)
+            ->findAll();
+
+        return $this->render('pages/achievements.html.twig', [
+            'achievements' => $achievements,
+            'completed' => $user->getAchievements(),
+        ]);
     }
 
     /**

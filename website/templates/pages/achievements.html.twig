@@ -10,11 +10,20 @@
 <div class="container">
     <div class="row section">
         <div class="col s12 m8 offset-m1 xl7 offset-xl1">
-            <ul class="collection">
-                <li class="collection-item"><div>Achievement<a class="secondary-content"><i class="material-icons">done</i></a></div></li>
-                <li class="collection-item"><div>Achievement<a class="secondary-content"><i class="material-icons">close</i></a></div></li>
-                <li class="collection-item"><div>Achievement<a class="secondary-content"><i class="material-icons">close</i></a></div></li>
-                <li class="collection-item"><div>Achievement<a class="secondary-content"><i class="material-icons">close</i></a></div></li>
+            <ul class="collapsible">
+                {% for achievement in achievements %}
+                    {% if achievement.getId() in completed %}
+                        <li>
+                            <div class="collapsible-header" style="cursor: pointer;">{{ achievement.getName() }}<div class="secondary-content" style="width: 100%; text-align: right;"><i class="material-icons">done</i></div></div>
+                            <div class="collapsible-body"><span>{{ achievement.getDescription() }}</span></div>
+                        </li>
+                    {% else %}
+                    <li>
+                        <div class="collapsible-header" style="cursor: pointer;">{{ achievement.getName() }}<div class="secondary-content" style="width: 100%; text-align: right;"><i class="material-icons">close</i></div></div>
+                        <div class="collapsible-body"><span>{{ achievement.getDescription() }}</span></div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
     </div>

@@ -1,31 +1,53 @@
-<div id="header">
-    <div class="container">
-        <div class="row">
-            <div class="col s12 m10 offset-m1">
-                <h2 class="header">Trading<a class="btn-floating btn-large waves-effect waves-light red modal-trigger pulse" href="#modal-trading" style="margin-left: 15px;"><i class="material-icons">add</i></a></h2>
-            </div>
-        </div>
-    </div>
-</div>
+{% extends 'base.html.twig' %}
 
-<div class="container">
-    <div class="row">
-        <div class="col s12 m8 offset-m1 xl7 offset-xl1">
-            <div class="row section">
-                <div class="col s12">
-                   Hello
+{% block body %}
+    <main>
+        <div id="header" style="border-bottom: none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m10 offset-m1">
+                        <h2 class="header">{{ title }}</h2>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div id="modal-trading" class="modal">
-    <div class="modal-content">
-        <h4>Send Trade Offer</h4>
-        <p>Hello!</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
-</div>
+        <div style="margin-left: -300px; border-bottom: 1px solid rgba(0,0,0,0.14);"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m8 offset-m1 xl7 offset-xl1">
+                    <div class="row section">
+                        {% if trade %}
+                            <div class="col s12">
+                                <span style="color: rgba(167, 167, 167, 0.87);">Your Items</span>
+                                <ul class="collection">
+                                    {% for item in trade[0].getReceivingItems() %}
+                                        <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col s12">
+                                <span style="color: rgba(167, 167, 167, 0.87);">{{ UserServices.getUserById(trade[0].getFrom()) }} Items</span>
+                                <ul class="collection">
+                                    {% for item in trade[0].getOfferedItems() %}
+                                        <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        <ul style="text-align: center;">
+                            <span style="color: rgba(167, 167, 167, 0.87);">You will receive {{ trade[0].getOfferedItems()|length }} items and give {{ UserServices.getUserById(trade[0].getFrom()) }} {{ trade[0].getReceivingItems()|length }} items</span> <br /> <br />
+                            <a id="submit" class="waves-effect waves-light btn">Accept</a>
+                            <a id="submit" class="waves-effect waves-light btn red lighten-1">Decline</a>
+                        </ul>
+                        {% else %}
+                            <div class="col s12">
+                                <ul class="collection">
+                                    <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">Wrong trade offer id given!</li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

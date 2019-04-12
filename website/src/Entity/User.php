@@ -63,6 +63,11 @@ class User implements UserInterface
      */
     private $level = 1;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $Achievements = [];
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
@@ -134,7 +139,7 @@ class User implements UserInterface
     public function getAvatar(): ?string
     {
         if($this->avatar === null) {
-            return "build/images/unknown-avatar.svg";
+            return "/build/images/unknown-avatar.svg";
         }
 
         return '/uploads/avatars/'.$this->avatar;
@@ -155,6 +160,18 @@ class User implements UserInterface
     public function setLevel(int $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getAchievements(): ?array
+    {
+        return $this->Achievements;
+    }
+
+    public function setAchievements(?array $Achievements): self
+    {
+        $this->Achievements = $Achievements;
 
         return $this;
     }
