@@ -13,11 +13,16 @@
             <div class="row section">
                 <div class="col s12">
                     <ul class="collection">
-                        <li class="collection-item">1. Username<a class="secondary-content">TOP 1</a></li>
-                        <li class="collection-item">2. Username<a class="secondary-content">TOP 2</a></li>
-                        <li class="collection-item">3. Username<a class="secondary-content">TOP 3</a></li>
-                        <li class="collection-item">4. Username</li>
-                        <li class="collection-item">5. Username -----> 25</li>
+                        {% set count = 1 %}
+                        {% for user in top|slice(0,10) %}
+                            {% if count > 3 %}
+                                <li class="collection-item">{{ count }}. {{ user.getUsername() }} ({{ user.getLevel() }} level)</li>
+                            {% else %}
+                                <li class="collection-item"><b>{{ count }}. {{ user.getUsername() }} ({{ user.getLevel() }} level)</b><a class="secondary-content">TOP {{ count }}</a></li>
+                            {% endif %}
+                            {% set count = count + 1 %}
+                        {% endfor %}
+                        <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">+{{ top|length-10 }} other users...</li>
                     </ul>
                 </div>
             </div>

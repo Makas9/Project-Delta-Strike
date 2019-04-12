@@ -13,10 +13,27 @@
         <div class="col s12 m8 offset-m1 xl7 offset-xl1">
             <div class="row section">
                 <div class="col s12">
+                    <span style="color: rgba(167, 167, 167, 0.87);">Active</span>
                     <ul class="collection">
-                        <li class="collection-item">Username offers you 1 item<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item">Username offers you 1 item<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item">Username offers you 1 item<a class="secondary-content"><i class="material-icons">add</i></a></li>
+                        {% if active %}
+                            {% for trade in active %}
+                                <li class="collection-item">Pending trade from <i>{{ UserServices.getUserById(trade.getFrom()) }}</i> <a href="/trade/{{ trade.getId() }}" target="_blank" class="secondary-content">Open</a></li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">You have no active trade offers!</li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col s12">
+                    <span style="color: rgba(167, 167, 167, 0.87);">Completed</span>
+                    <ul class="collection">
+                        {% if completed %}
+                            {% for trade in completed %}
+                                <li class="collection-item">{{ trade.getFrom() }} offers you 1 item<a class="secondary-content" style="color: rgba(167, 167, 167, 0.87);">{{ trade.statusToString() }}</a></li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">No trades to show!</li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
