@@ -58,6 +58,16 @@ class Trade
         return $this->userFrom;
     }
 
+    public function getReceivingItems()
+    {
+        return $this->receivingItems;
+    }
+
+    public function getOfferedItems()
+    {
+        return $this->offeredItems;
+    }
+
     public function getStatus()
     {
         return $this->status;
@@ -69,7 +79,7 @@ class Trade
                 return "Active";
                 break;
             case 1:
-                return "Completed";
+                return "Accepted";
                 break;
             case 2:
                 return "Denied";

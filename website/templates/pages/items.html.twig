@@ -12,7 +12,7 @@
         <div class="col s12 m8 offset-m1 xl7 offset-xl1">
             <ul class="collection">
                 {% for item in items %}
-                <li class="collection-item"><div><img src="{{ item.getImage() }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ item.getName() }} (A:{{ item.getOffensive() }} | D: {{ item.getDefensive() }}) <i>{{ item.getDescription() }}</i></div></li>
+                    <li class="collection-item"><div><img src="{{ item.getImage() }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ item.getName() }} (A:{{ item.getOffensive() }} | D: {{ item.getDefensive() }}) <i>{{ item.getDescription() }}</i></div></li>
                 {% endfor %}
             </ul>
         </div>

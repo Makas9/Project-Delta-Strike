@@ -84,7 +84,7 @@ class Item
     public function getImage(): ?string
     {
         if($this->image === null) {
-            return "build/images/unknown-avatar.svg";
+            return "/build/images/unknown-avatar.svg";
         }
 
         return '/uploads/avatars/'.$this->image;
