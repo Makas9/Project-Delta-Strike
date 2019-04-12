@@ -17,7 +17,7 @@
                     <ul class="collection">
                         {% if active %}
                             {% for trade in active %}
-                                <li class="collection-item">Pending trade from <i>{{ UserServices.getUserById(trade.getFrom()) }}</i> <a href="/trade/{{ trade.getId() }}" target="_blank" class="secondary-content">Open</a></li>
+                                <li class="collection-item">Pending trade offer from <i>{{ UserServices.getUserById(trade.getFrom()) }}</i> <a href="/trade/{{ trade.getId() }}" target="_blank" class="secondary-content">Open</a></li>
                             {% endfor %}
                         {% else %}
                             <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">You have no active trade offers!</li>
