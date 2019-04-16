@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
@@ -42,22 +42,32 @@ public class PlayerData
             }
         }
 
-        AddToArray(Knives, Name);
+        AddToArray(ref Knives, Name);
         SaveSystem.SavePlayer(this);
     }
 
-    public void AddGranade(string Name)
+
+    public GrenadeData GetGrenadeData(string Name)
     {
         foreach (var Granade in Granades)
         {
             if (Granade.Name == Name)
             {
-                Granade.Count++;
-                return;
+                Debug.Log(Name);
+                return Granade;
             }
         }
+        Debug.Log("New");
 
-        AddToArray(Granades, new GrenadeData(Name, 1));
+        GrenadeData data = new GrenadeData(Name, 0);
+        AddToArray(ref Granades, data);
+        Debug.Log("Len: " + Granades.Length);
+        return data;
+    }
+    public void AddGranade(string Name)
+    {
+        GrenadeData grenade = GetGrenadeData(Name);
+        grenade.Count++;
         SaveSystem.SavePlayer(this);
     }
 
@@ -71,7 +81,7 @@ public class PlayerData
             }
         }
 
-        AddToArray(Guns, Name);
+        AddToArray(ref Guns, Name);
         SaveSystem.SavePlayer(this);
     }
 
@@ -85,11 +95,11 @@ public class PlayerData
             }
         }
 
-        AddToArray(Vests, Name);
+        AddToArray(ref Vests, Name);
         SaveSystem.SavePlayer(this);
     }
 
-    public void AddToArray<T>(T[] array, T value)
+    public void AddToArray<T>(ref T[] array, T value)
     {
         if (array == null)
         {

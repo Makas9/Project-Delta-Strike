@@ -19,4 +19,4 @@ MonoBehaviour:
     for centuries. It is cheapest of any granades, due to its light weight it is easy
     to throw at any enemy you may encounter. However, due to its old-fashion design
     it explodes with quite a small radius.
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 7469631d9db683d4d9ccbefa99f7e81f, type: 3}

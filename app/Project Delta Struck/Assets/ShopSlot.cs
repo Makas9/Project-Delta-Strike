@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class ShopSlot : MonoBehaviour {
-
+    public ShopManager Manager;
 	public virtual void Fill(ScriptableObject obj)
     {
         string Name = GetTitle().text;
@@ -14,8 +14,13 @@ public abstract class ShopSlot : MonoBehaviour {
     public abstract void Buy();
     public virtual void Select()
     {
-        ShopReferences.Instance.SelectedOverlay.SetParent(transform, false);
-        ShopReferences.Instance.SelectedOverlay.SetSiblingIndex(0);
+        Manager.SelectedOverlay.SetParent(transform, false);
+        Manager.SelectedOverlay.SetSiblingIndex(0);
+    }
+
+    public Image GetImage()
+    {
+        return transform.Find("ImageContainer/Image").GetComponent<Image>();
     }
 
     public Text GetTitle()

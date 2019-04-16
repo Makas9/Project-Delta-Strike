@@ -7,7 +7,7 @@ using UnityEngine;
 public class Data : MonoBehaviour
 {
     public static Data Instance;
-    public GranadeSettings[] Granades;
+    public GrenadeSettings[] Grenades;
     public VestSettings[] Vests;
     public GunSettings[] Guns;
     public KnifeSettings[] Knives;
@@ -36,14 +36,16 @@ public class Data : MonoBehaviour
     }
 
     public void AddGrenade(string Name) => PlayerData.AddGranade(Name);
-    
-    public GranadeSettings GetGranadeSettings(string Name)
+    public void AddGun(string Name) => PlayerData.AddGun(Name);
+    public GrenadeData GetGrenadeData(string Name) => PlayerData.GetGrenadeData(Name);
+
+    public GrenadeSettings GetGrenadeSettings(string Name)
     {
-        foreach (GranadeSettings g in Granades)
+        foreach (GrenadeSettings g in Grenades)
         {
             if (g.Name == Name) return g;
         }
-        throw new Exception("Granade " + Name + " does note exit");
+        throw new Exception("Grenade " + Name + " does note exit");
     }
 
     public GunSettings GetGunSettings(string Name)
