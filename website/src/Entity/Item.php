@@ -32,14 +32,9 @@ class Item
     private $descripton;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="json_array")
      */
-    private $offensive;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $defensive;
+    private $stats;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -71,14 +66,9 @@ class Item
         return $this->descripton;
     }
 
-    public function getOffensive()
+    public function getStats()
     {
-        return $this->offensive;
-    }
-
-    public function getDefensive()
-    {
-        return $this->defensive;
+        return $this->stats;
     }
 
     public function getImage(): ?string
