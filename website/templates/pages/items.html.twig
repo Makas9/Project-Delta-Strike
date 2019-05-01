@@ -12,17 +12,21 @@
         <div class="col s12 m8 offset-m1 xl7 offset-xl1">
             <ul class="collapsible">
                 {% for item in items %}
-                        <li>
-                            <div class="collapsible-header" style="cursor: pointer;"><img src="{{ item.getImage() }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ item.getName() }}</div>
-                            <div class="collapsible-body no-padding" style="padding-top: 0px !important;">
-                                <div style="padding: 10px;">{{ item.getDescription() }}</div>
-                                <div style="padding: 10px; border-top: 1px solid #ddd;">
-                                    {% for key, value in item.getStats() %}
-                                        {{ key }}: {{ value }}<br />
-                                    {% endfor %}
+                    {% for item_l in items_list %}
+                        {% if (item) == (item_l.getId()) %}
+                            <li>
+                                <div class="collapsible-header" style="cursor: pointer;"><img src="{{ item_l.getImage() }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ item_l.getName() }}</div>
+                                <div class="collapsible-body no-padding" style="padding-top: 0px !important;">
+                                    <div style="padding: 10px;">{{ item_l.getDescription() }}</div>
+                                    <div style="padding: 10px; border-top: 1px solid #ddd;">
+                                        {% for key, value in item_l.getStats() %}
+                                            {{ key }}: {{ value }}<br />
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </ul>
         </div>

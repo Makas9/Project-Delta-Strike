@@ -32,14 +32,14 @@ class Item
     private $descripton;
 
     /**
-     * @ORM\Column(type="json_array")
-     */
-    private $stats;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $stats; // [IMPORTANT] Change type to object when migrating; (Database: { "damage": 10, "fire-rate": 0.1, "something": 1 }, { n }, { n+1 } }; n - items);
 
     public function getId()
     {
@@ -66,11 +66,6 @@ class Item
         return $this->descripton;
     }
 
-    public function getStats()
-    {
-        return $this->stats;
-    }
-
     public function getImage(): ?string
     {
         if($this->image === null) {
@@ -86,5 +81,9 @@ class Item
 
         return $this;
     }
-    // ... getter and setter methods
+
+    public function getStats()
+    {
+        return $this->stats;
+    }
 }

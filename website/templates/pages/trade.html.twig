@@ -20,23 +20,31 @@
                             <div class="col s12">
                                 <span style="color: rgba(167, 167, 167, 0.87);">Your Items</span>
                                 <ul class="collection">
-                                    {% for item in trade[0].getReceivingItems() %}
-                                        <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
-                                    {% endfor %}
+                                        {% for item in trade.getReceivingItems() %}
+                                            {% if item %}
+                                                <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                            {% else %}
+                                                <li class="collection-item"><div>No items!</div></li>
+                                            {% endif %}
+                                        {% endfor %}
                                 </ul>
                             </div>
                             <div class="col s12">
-                                <span style="color: rgba(167, 167, 167, 0.87);">{{ UserServices.getUserById(trade[0].getFrom()) }} Items</span>
+                                <span style="color: rgba(167, 167, 167, 0.87);">{{ UserServices.getUserById(trade.getFrom()) }} Items</span>
                                 <ul class="collection">
-                                    {% for item in trade[0].getOfferedItems() %}
-                                        <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                    {% for item in trade.getOfferedItems() %}
+                                        {% if item %}
+                                            <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                        {% else %}
+                                            <li class="collection-item"><div>No items!</div></li>
+                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                             </div>
                         <ul style="text-align: center;">
-                            <span style="color: rgba(167, 167, 167, 0.87);">You will receive {{ trade[0].getOfferedItems()|length }} items and give {{ UserServices.getUserById(trade[0].getFrom()) }} {{ trade[0].getReceivingItems()|length }} items</span> <br /> <br />
-                            <a id="submit" class="waves-effect waves-light btn">Accept</a>
-                            <a id="submit" class="waves-effect waves-light btn red lighten-1">Decline</a>
+                            <span style="color: rgba(167, 167, 167, 0.87);">You will receive {{ trade.getOfferedItems()|length }} items and give {{ UserServices.getUserById(trade.getFrom()) }} {{ trade.getReceivingItems()|length }} items</span> <br /> <br />
+                            <a href="/trade/accept/{{ id }}" class="waves-effect waves-light btn">Accept</a>
+                            <a href="/trade/decline/{{ id }}" class="waves-effect waves-light btn red lighten-1">Decline</a>
                         </ul>
                         {% else %}
                             <div class="col s12">
