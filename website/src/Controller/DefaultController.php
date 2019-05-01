@@ -37,9 +37,32 @@ class DefaultController extends AbstractController
     /**
      * @Route("/hub", name="hub")
      */
-    public function hub()
+    public function hub(Request $request)
     {
         $user = $this->getUser();
+
+        /* ----- */
+        $avatar = new ChangeAvatar();
+        $form = $this->createForm(UploadAvatar::class, $avatar);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $avatar->getAvatar();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('avatars_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+
+            }
+            $user->setAvatar($fileName);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->merge($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('hub');
+        }
+        /* ----- */
 
         $top = $this->getDoctrine()
             ->getRepository(User::class)
@@ -94,11 +117,103 @@ class DefaultController extends AbstractController
 
         $trade = $this->getDoctrine()
             ->getRepository(Trade::class)
-            ->findBy(array('userTo' => $user->getId(), 'id' => $id, 'status' => 0));
+            ->findOneBy(array('userTo' => $user->getId(), 'id' => $id, 'status' => 0));
 
         return $this->render('pages/trade.html.twig', [
+            'id' => $id,
+            'title' => 'Trade Offer #'.$id,
+            'trade' => $trade
+        ]);
+    }
+
+    /**
+     * @Route("/trade/accept/{id}", name="trade_accept")
+     */
+    public function trade_accept($id)
+    {
+        $user = $this->getUser();
+
+        $trade = $this->getDoctrine()
+            ->getRepository(Trade::class)
+            ->findOneBy(array('userTo' => $user->getId(), 'id' => $id, 'status' => 0));
+
+        $inventory = $this->getDoctrine()
+            ->getRepository(Inventory::class)
+            ->findOneBy(array('user' => $user->getId()));
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        /* ----- */
+
+        if ($trade->getFrom() == $user->getId()) {
+            $receiving = $trade->getReceivingItems();
+            $offering = $trade->getOfferedItems();
+        } else {
+            $receiving = $trade->getOfferedItems();
+            $offering = $trade->getReceivingItems();
+        }
+
+        /* ----- */
+
+        $values = "";
+        foreach($receiving as $item){
+            $values .= '("'.$item.'", "'.$user->getId().'"),';
+            $sql = "DELETE FROM inventory WHERE item=".$item." AND user=".$trade->getFrom()." LIMIT 1";
+            $em = $this->getDoctrine()->getManager();
+            $stmt = $em->getConnection()->prepare($sql);
+            $stmt->execute();
+        }
+        $sql = "INSERT INTO inventory (item, user) VALUES ".rtrim($values, ',');
+        $em = $this->getDoctrine()->getManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+
+        /* ----- */
+
+        $values = "";
+        foreach($offering as $item){
+            $values .= '("'.$item.'", "'.$trade->getFrom().'"),';
+            $sql = "DELETE FROM inventory WHERE item=".$item." AND user=".$user->getId()." LIMIT 1";
+            $em = $this->getDoctrine()->getManager();
+            $stmt = $em->getConnection()->prepare($sql);
+            $stmt->execute();
+        }
+        $sql = "INSERT INTO inventory (item, user) VALUES ".rtrim($values, ',');
+        $em = $this->getDoctrine()->getManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+
+        /* ----- */
+
+        $trade->setStatus(1); // Accept
+        $entityManager->flush();
+
+        return $this->render('pages/trade_action.html.twig', [
             'title' => 'Trade Offer #'.$id,
             'trade' => $trade,
+            'action' => 'accept'
+        ]);
+    }
+
+    /**
+     * @Route("/trade/decline/{id}", name="trade_decline")
+     */
+    public function trade_decline($id)
+    {
+        $user = $this->getUser();
+
+        $trade = $this->getDoctrine()
+            ->getRepository(Trade::class)
+            ->findOneBy(array('userTo' => $user->getId(), 'id' => $id, 'status' => 0));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $trade->setStatus(2); // Decline
+        $entityManager->flush();
+
+        return $this->render('pages/trade_action.html.twig', [
+            'title' => 'Trade Offer #'.$id,
+            'trade' => $trade,
+            'action' => 'decline'
         ]);
     }
 
@@ -174,13 +289,20 @@ class DefaultController extends AbstractController
         $inventory = $this->getDoctrine()
             ->getRepository(Inventory::class)
             ->findBy(array('user' => $user->getId()));
+
+        $inventoryArray = array();
+        foreach($inventory as $datas){
+            array_push($inventoryArray, $datas->getItem());
+        }
+
         $items = $this->getDoctrine()
             ->getRepository(Item::class)
-            ->findBy(array('id' => $inventory));
+            ->findBy(array('id' => $inventoryArray));
 
         return $this->render('pages/items.html.twig', [
-            'count' => count($items),
-            'items' => $items,
+            'count' => count($inventoryArray),
+            'items' => $inventoryArray,
+            'items_list' => $items,
         ]);
     }
 

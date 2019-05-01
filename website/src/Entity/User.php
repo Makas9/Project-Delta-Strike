@@ -64,9 +64,9 @@ class User implements UserInterface
     private $level = 1;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $Achievements = [];
+    private $achievements; // [IMPORTANT] Change type to object when migrating; (Database: [ 1, 2, n ]; n - completed achievement);
 
     public function __construct()
     {
@@ -164,14 +164,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAchievements(): ?array
+    public function getAchievements()
     {
-        return $this->Achievements;
+        return $this->achievements;
     }
 
-    public function setAchievements(?array $Achievements): self
+    public function setAchievements($achievements): self
     {
-        $this->Achievements = $Achievements;
+        $this->achievements = $achievements;
 
         return $this;
     }

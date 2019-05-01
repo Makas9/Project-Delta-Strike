@@ -73,6 +73,12 @@ class Trade
         return $this->status;
     }
 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
     public function statusToString(){
         switch($this->status){
             case 0:
