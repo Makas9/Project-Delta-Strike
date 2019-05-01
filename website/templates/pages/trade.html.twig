@@ -20,16 +20,24 @@
                             <div class="col s12">
                                 <span style="color: rgba(167, 167, 167, 0.87);">Your Items</span>
                                 <ul class="collection">
-                                    {% for item in trade.getReceivingItems() %}
-                                        <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
-                                    {% endfor %}
+                                        {% for item in trade.getReceivingItems() %}
+                                            {% if item %}
+                                                <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                            {% else %}
+                                                <li class="collection-item"><div>No items!</div></li>
+                                            {% endif %}
+                                        {% endfor %}
                                 </ul>
                             </div>
                             <div class="col s12">
                                 <span style="color: rgba(167, 167, 167, 0.87);">{{ UserServices.getUserById(trade.getFrom()) }} Items</span>
                                 <ul class="collection">
                                     {% for item in trade.getOfferedItems() %}
-                                        <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                        {% if item %}
+                                            <li class="collection-item"><div><img src="{{ ItemServices.getImage(item) }}" style="vertical-align: bottom; height: 25px; width: 25px; margin-right: 5px;"> {{ ItemServices.getName(item) }}</div></li>
+                                        {% else %}
+                                            <li class="collection-item"><div>No items!</div></li>
+                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                             </div>
