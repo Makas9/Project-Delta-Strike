@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
+    public string Username;
     public float Money = 1000f;
     public int LevelReached = 1;
     public GrenadeData[] Granades;
@@ -20,7 +21,7 @@ public class PlayerData
     public string CurrentGun;
     public string CurrentKnife;
 
-    public PlayerData(string CurrentVest, string CurrentGun, string CurrentKnife)
+    public PlayerData(string CurrentVest, string CurrentGun, string CurrentKnife, string Username)
     {
         Vests  = new string[1];
         Guns   = new string[1];
@@ -28,7 +29,7 @@ public class PlayerData
         this.CurrentVest  = Vests [0] = CurrentVest;
         this.CurrentGun   = Guns  [0] = CurrentGun;
         this.CurrentKnife = Knives[0] = CurrentKnife;
-
+        this.Username = Username;
         Granades = new GrenadeData[0];
     }
 

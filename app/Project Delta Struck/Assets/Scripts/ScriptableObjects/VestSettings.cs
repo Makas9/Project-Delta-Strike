@@ -11,5 +11,5 @@ public class VestSettings : ScriptableObject
     public float Price = 100f;
     [TextArea(3, 10)]
     public string Description = "Default granade";
-    public Sprite Sprite;
+    //public Sprite Sprite;
 }

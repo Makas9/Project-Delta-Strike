@@ -22,7 +22,15 @@ public class Data : MonoBehaviour
             return;
         }
         Instance = this;
-        PlayerData = SaveSystem.LoadPlayer();
+        Debug.Log(JsonUtility.ToJson(Guns[0]));
+        Debug.Log(JsonUtility.ToJson(Vests[0]));
+        Debug.Log(JsonUtility.ToJson(Knives[0]));
+        Debug.Log(JsonUtility.ToJson(Grenades[0]));
+    }
+
+    public void SetPlayerData(PlayerData data)
+    {
+        PlayerData = data;
     }
 
     public string CurrentVest => PlayerData.CurrentVest;

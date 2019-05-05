@@ -10,5 +10,5 @@ public class KnifeSettings : WeaponSettings
     public float Price = 100f;
     [TextArea(3, 10)]
     public string Description = "Default knife";
-    public Sprite Sprite;
+    //public Sprite Sprite;
 }

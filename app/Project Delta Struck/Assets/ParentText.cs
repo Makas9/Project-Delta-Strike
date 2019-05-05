@@ -11,7 +11,7 @@ public class ParentText : MonoBehaviour {
     public bool InitialLetterDifferent = true;
     public Color InitialLetterColor;
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         string parentName = transform.parent.name;
         if (InitialLetterDifferent)
         {

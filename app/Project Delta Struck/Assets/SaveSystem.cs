@@ -8,30 +8,26 @@ using System.IO;
 
 public static class SaveSystem
 {
-    /// <summary>
-    /// Player statistics data file path
-    /// </summary>
-    static readonly string playerDataPath = Path.Combine(Application.persistentDataPath, "playerData.data");
-    /// <summary>
-    /// Player combo (vehicle and rockets equipped) data file path
-    /// </summary>
-
-    public static bool PlayerDataExists()
-    {
-        return File.Exists(playerDataPath);
-    }
-
     public static void SavePlayer(PlayerData data)
     {
+        Debug.Log("Username: " + data.Username);
+        string PlayerDataDir = Path.Combine(Application.persistentDataPath, data.Username);
+        string PlayerDataPath = Path.Combine(PlayerDataDir, "playerData.data");
+        if (!Directory.Exists(PlayerDataDir))
+        {
+            Directory.CreateDirectory(PlayerDataDir);
+        }
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(playerDataPath, FileMode.Create);
+        FileStream stream = new FileStream(PlayerDataPath, FileMode.Create);
 
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static PlayerData LoadPlayer()
+    public static PlayerData LoadPlayer(string username)
     {
+        string PlayerDataDir = Path.Combine(Application.persistentDataPath, username);
+        string playerDataPath = Path.Combine(PlayerDataDir, "playerData.data");
         Debug.Log(playerDataPath);
         if (File.Exists(playerDataPath))
         {
@@ -45,14 +41,17 @@ public static class SaveSystem
         else
         {
             Debug.Log("Save file not found in " + playerDataPath);
-            PlayerData data = new PlayerData("Basic", "Basic", "Basic");
+            PlayerData data = new PlayerData("Basic", "Basic", "Basic", DBManager.username);
             SavePlayer(data);
             return data;
         }
     }
 
-    public static void DeletePlayerData()
+    public static void DeletePlayerData(string username)
     {
+        string PlayerDataDir = Path.Combine(Application.persistentDataPath, username);
+        string playerDataPath = Path.Combine(PlayerDataDir, "playerData.data");
+
         if (File.Exists(playerDataPath))
             File.Delete(playerDataPath);
     }

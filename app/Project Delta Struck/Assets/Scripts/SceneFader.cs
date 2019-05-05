@@ -32,7 +32,7 @@ public class SceneFader : MonoBehaviour {
 			t -= Time.deltaTime;
 			float a = curve.Evaluate(t);
 			img.color = new Color (0f, 0f, 0f, a);
-			yield return 0;
+			yield return null;
 		}
 	}
 
@@ -45,10 +45,15 @@ public class SceneFader : MonoBehaviour {
 			t += Time.deltaTime;
 			float a = curve.Evaluate(t);
 			img.color = new Color(0f, 0f, 0f, a);
-			yield return 0;
+			yield return null;
 		}
 
 		SceneManager.LoadScene(scene);
 	}
 
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

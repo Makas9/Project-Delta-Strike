@@ -12,5 +12,5 @@ public class GrenadeSettings : WeaponSettings
     public float Weight = 1f;
     [TextArea(3, 10)]
     public string Description = "Default granade";
-    public Sprite Sprite;
+    //public Sprite Sprite;
 }

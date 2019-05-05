@@ -13,5 +13,5 @@ public class GunSettings : WeaponSettings
     public float ReloadTime = 2f;
     [TextArea(3, 10)]
     public string Description = "Default gun";
-    public Sprite Sprite;
+    //public Sprite Sprite;
 }
