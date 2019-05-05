@@ -12,7 +12,7 @@ public class GrenadeSlot : ShopSlot
     {
         GrenadeSettings settings = obj as GrenadeSettings;
         GetTitle().text = transform.name = settings.Name;
-        GetPrice().text = settings.Price.ToString();
+        GetPrice().text = settings.stats.Price.ToString();
         Image img = GetImage();
         img.sprite = settings.Sprite;
         Manager.DescriptionLbl.text = settings.Description;
@@ -22,7 +22,7 @@ public class GrenadeSlot : ShopSlot
     public override void Buy()
     {
         string Name = GetTitle().text;
-        float Price = Data.Instance.GetGrenadeSettings(Name).Price;
+        float Price = Data.Instance.GetGrenadeSettings(Name).stats.Price;
         if (Price <= Data.Instance.Money)
         {
             Data.Instance.Money -= Price;
