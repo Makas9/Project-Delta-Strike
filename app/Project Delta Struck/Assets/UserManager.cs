@@ -34,7 +34,7 @@ public class UserManager : MonoBehaviour {
         {
             DBManager.username = usernameField.text;
             SceneFader.Instance.FadeTo("MainMenu");
-            Data.Instance.SetPlayerData(SaveSystem.LoadPlayer(DBManager.username));
+            SaveSystem.Instance.LoadPlayer();
         }
         else
         {

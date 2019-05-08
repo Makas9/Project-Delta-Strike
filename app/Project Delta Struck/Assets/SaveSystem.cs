@@ -1,58 +1,90 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
 using System.Text;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using System.IO;
 
-public static class SaveSystem
+public class SaveSystem : MonoBehaviour
 {
-    public static void SavePlayer(PlayerData data)
+    public static SaveSystem Instance;
+    private void Awake()
     {
-        Debug.Log("Username: " + data.Username);
-        string PlayerDataDir = Path.Combine(Application.persistentDataPath, data.Username);
-        string PlayerDataPath = Path.Combine(PlayerDataDir, "playerData.data");
-        if (!Directory.Exists(PlayerDataDir))
+        if (Instance == null)
         {
-            Directory.CreateDirectory(PlayerDataDir);
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
         }
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(PlayerDataPath, FileMode.Create);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
+        else Destroy(gameObject);
+    }
+    public void SavePlayer(PlayerData data)
+    {
+        CallUploadData(data);
     }
 
-    public static PlayerData LoadPlayer(string username)
+    public void CallGetData()
     {
-        string PlayerDataDir = Path.Combine(Application.persistentDataPath, username);
-        string playerDataPath = Path.Combine(PlayerDataDir, "playerData.data");
-        Debug.Log(playerDataPath);
-        if (File.Exists(playerDataPath))
+        StartCoroutine(GetData());
+    }
+
+    IEnumerator GetData()
+    {
+        WWWForm form = new WWWForm();
+        Debug.Log(DBManager.username);
+        form.AddField("username", DBManager.username);
+        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/getPlayerData.php", form);
+        yield return www;
+        Debug.Log(www.text);
+        PlayerData data = JsonUtility.FromJson<PlayerData>(www.text);
+        if (data == null)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(playerDataPath, FileMode.Open);
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-            stream.Close();
-            Debug.Log("path exists");
-            return data;
+            Debug.Log("data was null");
+            Data.Instance.PlayerData = new PlayerData("Vest", "M9", "Wooden knife", DBManager.username);
+            CallUploadData(Data.Instance.PlayerData);
         }
         else
         {
-            Debug.Log("Save file not found in " + playerDataPath);
-            PlayerData data = new PlayerData("Basic", "Basic", "Basic", DBManager.username);
-            SavePlayer(data);
-            return data;
+            Data.Instance.PlayerData = data;
         }
+
+        Debug.Log("PlayerLoaded");
     }
 
-    public static void DeletePlayerData(string username)
+    public void CallUploadData(PlayerData playerData)
     {
-        string PlayerDataDir = Path.Combine(Application.persistentDataPath, username);
-        string playerDataPath = Path.Combine(PlayerDataDir, "playerData.data");
+        StartCoroutine(UploadData(playerData));
+    }
 
-        if (File.Exists(playerDataPath))
-            File.Delete(playerDataPath);
+    IEnumerator UploadData(PlayerData playerData)
+    {
+        WWWForm form = new WWWForm();
+        Debug.Log(DBManager.username);
+        form.AddField("username", DBManager.username);
+        form.AddField("data", JsonUtility.ToJson(playerData));
+        Debug.Log(JsonUtility.ToJson(playerData));
+        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/uploadPlayerData.php", form);
+        yield return www;
+        Debug.Log(www.text);
+    }
+
+    public void LoadPlayer()
+    {
+        CallGetData();
+    }
+    /// <summary>
+    /// Adds item to `item` table in dababase
+    /// </summary>
+    public void CallAddItem(string itemName)
+    {
+        StartCoroutine(AddItem(itemName));
+    }
+
+    public IEnumerator AddItem(string itemName)
+    {
+        WWWForm form = new WWWForm();
+        Debug.Log(DBManager.username);
+        form.AddField("username", DBManager.username);
+        form.AddField("item", itemName);
+        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/uploadUserItem.php", form);
+        yield return www;
+        Debug.Log(www.text);
     }
 }

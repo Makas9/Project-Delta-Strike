@@ -8,8 +8,10 @@ public class KnifeSettings : WeaponSettings
 
     public KnifeStats knifeStats;
 
-    public KnifeSettings(KnifeStats knifeStats)
+    public void Fill(KnifeStats knifeStats, string Name, string Description)
     {
+        this.Name = Name;
+        this.Description = Description;
         this.knifeStats = knifeStats;
     }
 }

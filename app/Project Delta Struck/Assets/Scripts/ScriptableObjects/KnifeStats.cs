@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 public class KnifeStats
 {
     public float Price = 100f;
-    
+    public float Damage = 1f;
 }

@@ -127,9 +127,9 @@ GameObject:
   - component: {fileID: 222503472506462162}
   - component: {fileID: 114831799564445804}
   - component: {fileID: 114312036903291312}
-  - component: {fileID: 114371990570757646}
+  - component: {fileID: 114567555647949320}
   m_Layer: 5
-  m_Name: GunSlot
+  m_Name: KnifeSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114371990570757646}
+      - m_Target: {fileID: 0}
         m_MethodName: Select
         m_Mode: 1
         m_Arguments:
@@ -277,18 +277,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Basic
---- !u!114 &114371990570757646
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807444262507784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cd7dfbb9b50d8d4eacf25d7d8406925, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Manager: {fileID: 0}
 --- !u!114 &114374704480782500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,7 +343,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114371990570757646}
+      - m_Target: {fileID: 0}
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
@@ -401,6 +389,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 100
+--- !u!114 &114567555647949320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807444262507784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbda43898ef578e4dba7996221b90e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Manager: {fileID: 0}
 --- !u!114 &114583451991969024
 MonoBehaviour:
   m_ObjectHideFlags: 1

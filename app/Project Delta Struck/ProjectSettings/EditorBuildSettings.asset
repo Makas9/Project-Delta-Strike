@@ -14,10 +14,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoginMenu.unity
     guid: bb0b5fad4e18080488755b972aefd047
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/RegisterMenu.unity
-    guid: 9e6669d2f028dcd45be69ee3d84d5260
-  - enabled: 1
-    path: Assets/Scenes/Shop.unity
+    path: Assets/Scenes/Inventory.unity
     guid: 9ab4306d5b9865444b8d64a66604f66e
+  - enabled: 1
+    path: Assets/Scenes/GrenadesShop.unity
+    guid: 4257c9ed3907ef84c83c1f63628c4f72
+  - enabled: 1
+    path: Assets/Scenes/GunsShop.unity
+    guid: bcdf37b897bce7440961705d74d5b895
+  - enabled: 1
+    path: Assets/Scenes/VestsShop.unity
+    guid: 0cecce4ef064018408ccdeac672a52f3
+  - enabled: 1
+    path: Assets/Scenes/KnivesShop.unity
+    guid: a6fc9f10c7d857940aa26658fcfdb5d5
+  - enabled: 1
+    path: Assets/Scenes/1.unity
+    guid: 6c179d2e7116ec140979077efcdb5134
   m_configObjects: {}

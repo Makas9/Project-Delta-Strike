@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4239361462561642}
-  - component: {fileID: 114346549837799350}
+  - component: {fileID: 114102301511489034}
   m_Layer: 5
   m_Name: SceneFader
   m_TagString: Untagged
@@ -75,7 +75,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114346549837799350
+--- !u!114 &114102301511489034
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,30 +83,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1733498380513664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20df6ef81630fda42840ae4e58692d18, type: 3}
+  m_Script: {fileID: 11500000, guid: c251c9e3a00a6b74d8f7e0db484bbfe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 114476403248379360}
+  img: {fileID: 114650190123080904, guid: 3e96add581528d548b9ce072830a26c2, type: 2}
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 2.0000224
+      outSlope: 2.0000224
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
+      time: 0.5093689
+      value: 1.0187492
+      inSlope: 2.0000224
+      outSlope: 2.0000224
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

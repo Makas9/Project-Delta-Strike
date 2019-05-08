@@ -9,17 +9,18 @@ public class PlayerData
     public string Username;
     public float Money = 1000f;
     public int LevelReached = 1;
-    public GrenadeData[] Granades;
+    public GrenadeData[] Grenades;
     public string[]      Vests;
     public string[]      Guns;
     public string[]      Knives;
     public int VestsCount;
     public int GunsCount;
     public int KnivesCount;
-    public int GranadesCount;
+    public int GrenadesCount;
     public string CurrentVest;
     public string CurrentGun;
     public string CurrentKnife;
+    public GrenadeData CurrentGrenades;
 
     public PlayerData(string CurrentVest, string CurrentGun, string CurrentKnife, string Username)
     {
@@ -30,7 +31,7 @@ public class PlayerData
         this.CurrentGun   = Guns  [0] = CurrentGun;
         this.CurrentKnife = Knives[0] = CurrentKnife;
         this.Username = Username;
-        Granades = new GrenadeData[0];
+        Grenades = new GrenadeData[0];
     }
 
     public void AddKnife(string Name)
@@ -39,18 +40,18 @@ public class PlayerData
         {
             if (Knife == Name)
             {
-                throw new Exception("Knife " + Name + " is already bought");
+                return;
             }
         }
-
+        SaveSystem.Instance.CallAddItem(Name);
         AddToArray(ref Knives, Name);
-        SaveSystem.SavePlayer(this);
+        SaveSystem.Instance.SavePlayer(this);
     }
 
 
     public GrenadeData GetGrenadeData(string Name)
     {
-        foreach (var Granade in Granades)
+        foreach (var Granade in Grenades)
         {
             if (Granade.Name == Name)
             {
@@ -61,15 +62,16 @@ public class PlayerData
         Debug.Log("New");
 
         GrenadeData data = new GrenadeData(Name, 0);
-        AddToArray(ref Granades, data);
-        Debug.Log("Len: " + Granades.Length);
+        AddToArray(ref Grenades, data);
+        Debug.Log("Len: " + Grenades.Length);
         return data;
     }
     public void AddGranade(string Name)
     {
         GrenadeData grenade = GetGrenadeData(Name);
+        AddToArray(ref Grenades, grenade);
         grenade.Count++;
-        SaveSystem.SavePlayer(this);
+        SaveSystem.Instance.CallAddItem(Name);
     }
 
     public void AddGun(string Name)
@@ -78,12 +80,12 @@ public class PlayerData
         {
             if (Gun == Name)
             {
-                throw new Exception("Gun " + Name + " is already bought");
+                return;
             }
         }
 
         AddToArray(ref Guns, Name);
-        SaveSystem.SavePlayer(this);
+        SaveSystem.Instance.CallAddItem(Name);
     }
 
     public void AddVest(string Name)
@@ -92,12 +94,12 @@ public class PlayerData
         {
             if (Vest == Name)
             {
-                throw new Exception("Vest " + Name + " is already bought");
+                return;
             }
         }
 
+        SaveSystem.Instance.CallAddItem(Name);
         AddToArray(ref Vests, Name);
-        SaveSystem.SavePlayer(this);
     }
 
     public void AddToArray<T>(ref T[] array, T value)

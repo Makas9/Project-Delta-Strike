@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GunSlot : ShopSlot {
+public class VestSlot : ShopSlot {
 
     public override void Fill(ScriptableObject obj)
     {
-        GunSettings settings = obj as GunSettings;
+        VestSettings settings = obj as VestSettings;
         GetTitle().text = settings.Name;
-        GetPrice().text = settings.gunStats.Price.ToString();
+        GetPrice().text = settings.vestStats.Price.ToString();
         Image img = GetImage();
         img.sprite = settings.Sprite;
         Manager.DescriptionLbl.text = settings.Description;
     }
+
 
     public override void Buy()
     {
@@ -37,7 +38,7 @@ public class GunSlot : ShopSlot {
         base.Select();
         string Name = GetTitle().text;
 
-        GunSettings settings = Data.Instance.GetGunSettings(Name);
+        VestSettings settings = Data.Instance.GetVestSettings(Name);
         Manager.DescriptionLbl.text = settings.Description;
     }
 }
