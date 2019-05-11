@@ -1,59 +1,90 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
 using System.Text;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using System.IO;
 
-public static class SaveSystem
+public class SaveSystem : MonoBehaviour
 {
-    /// <summary>
-    /// Player statistics data file path
-    /// </summary>
-    static readonly string playerDataPath = Path.Combine(Application.persistentDataPath, "playerData.data");
-    /// <summary>
-    /// Player combo (vehicle and rockets equipped) data file path
-    /// </summary>
-
-    public static bool PlayerDataExists()
+    public static SaveSystem Instance;
+    private void Awake()
     {
-        return File.Exists(playerDataPath);
-    }
-
-    public static void SavePlayer(PlayerData data)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(playerDataPath, FileMode.Create);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
-    }
-
-    public static PlayerData LoadPlayer()
-    {
-        Debug.Log(playerDataPath);
-        if (File.Exists(playerDataPath))
+        if (Instance == null)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(playerDataPath, FileMode.Open);
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-            stream.Close();
-            Debug.Log("path exists");
-            return data;
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else Destroy(gameObject);
+    }
+    public void SavePlayer(PlayerData data)
+    {
+        CallUploadData(data);
+    }
+
+    public void CallGetData()
+    {
+        StartCoroutine(GetData());
+    }
+
+    IEnumerator GetData()
+    {
+        WWWForm form = new WWWForm();
+        Debug.Log(DBManager.username);
+        form.AddField("username", DBManager.username);
+        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/getPlayerData.php", form);
+        yield return www;
+        Debug.Log(www.text);
+        PlayerData data = JsonUtility.FromJson<PlayerData>(www.text);
+        if (data == null)
+        {
+            Debug.Log("data was null");
+            Data.Instance.PlayerData = new PlayerData("Vest", "M9", "Wooden knife", DBManager.username);
+            CallUploadData(Data.Instance.PlayerData);
         }
         else
         {
-            Debug.Log("Save file not found in " + playerDataPath);
-            PlayerData data = new PlayerData("Basic", "Basic", "Basic");
-            SavePlayer(data);
-            return data;
+            Data.Instance.PlayerData = data;
         }
+
+        Debug.Log("PlayerLoaded");
     }
 
-    public static void DeletePlayerData()
+    public void CallUploadData(PlayerData playerData)
     {
-        if (File.Exists(playerDataPath))
-            File.Delete(playerDataPath);
+        StartCoroutine(UploadData(playerData));
+    }
+
+    IEnumerator UploadData(PlayerData playerData)
+    {
+        WWWForm form = new WWWForm();
+        Debug.Log(DBManager.username);
+        form.AddField("username", DBManager.username);
+        form.AddField("data", JsonUtility.ToJson(playerData));
+        Debug.Log(JsonUtility.ToJson(playerData));
+        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/uploadPlayerData.php", form);
+        yield return www;
+        Debug.Log(www.text);
+    }
+
+    public void LoadPlayer()
+    {
+        CallGetData();
+    }
+    /// <summary>
+    /// Adds item to `item` table in dababase
+    /// </summary>
+    public void CallAddItem(string itemName)
+    {
+        StartCoroutine(AddItem(itemName));
+    }
+
+    public IEnumerator AddItem(string itemName)
+    {
+        WWWForm form = new WWWForm();
+        Debug.Log(DBManager.username);
+        form.AddField("username", DBManager.username);
+        form.AddField("item", itemName);
+        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/uploadUserItem.php", form);
+        yield return www;
+        Debug.Log(www.text);
     }
 }

@@ -995,7 +995,7 @@ Prefab:
     - target: {fileID: 114433627311801070, guid: de5752f88f3e86f4691a5b667a3cf89e,
         type: 2}
       propertyPath: m_Text
-      value: Armoured <color=#feae34>Pixel</color> Forces
+      value: Project <color=#feae34>Delta</color> Struct
       objectReference: {fileID: 0}
     - target: {fileID: 114433627311801070, guid: de5752f88f3e86f4691a5b667a3cf89e,
         type: 2}
@@ -1016,6 +1016,11 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_FontSize
       value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 114433627311801070, guid: de5752f88f3e86f4691a5b667a3cf89e,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de5752f88f3e86f4691a5b667a3cf89e, type: 2}
@@ -1797,7 +1802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000015278776}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1197447727
@@ -1832,7 +1837,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 20
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
@@ -3105,6 +3110,16 @@ Prefab:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114060928899895044, guid: 893c715685957b54cb6195895eaa34c2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1543677146}
+    - target: {fileID: 114060928899895044, guid: 893c715685957b54cb6195895eaa34c2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893c715685957b54cb6195895eaa34c2, type: 2}
   m_IsPrefabAsset: 0
@@ -3287,7 +3302,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1927524315142098, guid: 893c715685957b54cb6195895eaa34c2, type: 2}
       propertyPath: m_Name
-      value: Shop
+      value: Inventory
       objectReference: {fileID: 0}
     - target: {fileID: 224160519574006682, guid: 893c715685957b54cb6195895eaa34c2,
         type: 2}
@@ -3322,12 +3337,17 @@ Prefab:
     - target: {fileID: 114060928899895044, guid: 893c715685957b54cb6195895eaa34c2,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Shop
+      value: Inventory
       objectReference: {fileID: 0}
     - target: {fileID: 224160519574006682, guid: 893c715685957b54cb6195895eaa34c2,
         type: 2}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114698352051387994, guid: 893c715685957b54cb6195895eaa34c2,
+        type: 2}
+      propertyPath: m_Text
+      value: <color=#FEAE34>I</color>nventory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893c715685957b54cb6195895eaa34c2, type: 2}

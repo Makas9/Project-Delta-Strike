@@ -6,5 +6,7 @@ using UnityEngine;
 
 public class WeaponSettings : ScriptableObject
 {
-    public float Damage = 1f;
+    public string Name;
+    public string Description = "description";
+    public Sprite Sprite;
 }

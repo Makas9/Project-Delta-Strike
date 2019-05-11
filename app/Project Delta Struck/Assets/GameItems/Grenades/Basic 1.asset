@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2ebf827c48b0c4ca16d2a43d5df451, type: 3}
+  m_Name: Basic 1
+  m_EditorClassIdentifier: 
+  Damage: 1
+  ExplosionRadius: 1
+  Price: 300
+  Weight: 1
+  Description: This is a basic military granade that has been used by armies & soldiers
+    for centuries. It is cheapest of any granades, due to its light weight it is easy
+    to throw at any enemy you may encounter. However, due to its old-fashion design
+    it explodes with quite a small radius.
+  Sprite: {fileID: 21300000, guid: fbe9cff0b2ea6864e81dcf18230686e8, type: 3}
