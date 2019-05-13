@@ -28,10 +28,9 @@ public class GrenadeSlot : ShopSlot
             Data.Instance.Money -= Price;
             Manager.MoneyDisplay.UpdateMoney();
             Debug.Log(Name);
-            Data.Instance.AddGrenade(Name);
-            GrenadeData data = Data.Instance.GetGrenadeData(Name);
-            Debug.Log(data.Count);
-            Manager.UpperRightLbl.text = data.Count.ToString();
+            int count = Data.Instance.GetGrenadesCount(Name);
+            Data.Instance.PlayerData.AddItemToInventoryDB(Name);
+            Manager.UpperRightLbl.text = count.ToString();
         }
         else
         {
@@ -43,9 +42,8 @@ public class GrenadeSlot : ShopSlot
     {
         base.Select();
         string Name = GetTitle().text;
-        GrenadeData data = Data.Instance.GetGrenadeData(Name);
-        Manager.UpperRightLbl.text = data.Count.ToString();
-        print(data.Count);
+        int count = Data.Instance.GetGrenadesCount(Name);
+        Manager.UpperRightLbl.text = count.ToString();
 
         GrenadeSettings settings = Data.Instance.GetGrenadeSettings(Name);
         Manager.DescriptionLbl.text = settings.Description;

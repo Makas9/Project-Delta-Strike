@@ -28,13 +28,13 @@ public class UserManager : MonoBehaviour {
         WWWForm form = new WWWForm();
         form.AddField("username", usernameField.text);
         form.AddField("password", passwordField.text);
-        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/login.php", form);
+        WWW www = new WWW("http://u484157030.hostingerapp.com/login.php", form);
         yield return www;
         if (www.text.StartsWith("Valid"))
         {
             DBManager.username = usernameField.text;
-            SceneFader.Instance.FadeTo("MainMenu");
             SaveSystem.Instance.LoadPlayer();
+            SceneFader.Instance.FadeTo("MainMenu");
         }
         else
         {

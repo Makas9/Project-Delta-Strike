@@ -33,6 +33,16 @@ public class Data : MonoBehaviour
         //Debug.Log(JsonUtility.ToJson(Grenades[0].stats));
     }
 
+    public int GetGrenadesCount(string Name)
+    {
+        int i = 0;
+        foreach (string g in userItems)
+        {
+            if (g == Name) i++;
+        }
+        return i;
+    }
+
     public void AddGun(GunSettings settings)
     {
         AddToArray(ref Guns, settings);
@@ -65,10 +75,6 @@ public class Data : MonoBehaviour
         get => PlayerData.Money;
         set => PlayerData.Money = value;
     }
-
-    public void AddGrenade(string Name) => PlayerData.AddGranade(Name);
-    public void AddGun(string Name) => PlayerData.AddGun(Name);
-    public GrenadeData GetGrenadeData(string Name) => PlayerData.GetGrenadeData(Name);
 
     public GrenadeSettings GetGrenadeSettings(string Name)
     {

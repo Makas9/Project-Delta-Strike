@@ -11,6 +11,7 @@ public class GunSlot : ShopSlot {
         GetTitle().text = settings.Name;
         GetPrice().text = settings.gunStats.Price.ToString();
         Image img = GetImage();
+        Debug.Log(settings.Name + " " + (settings.Sprite == null));
         img.sprite = settings.Sprite;
         Manager.DescriptionLbl.text = settings.Description;
     }
@@ -24,7 +25,7 @@ public class GunSlot : ShopSlot {
             Data.Instance.Money -= Price;
             Manager.MoneyDisplay.UpdateMoney();
             Debug.Log(Name);
-            Data.Instance.AddGun(Name);
+            Data.Instance.PlayerData.AddItemToInventoryDB(Name);
         }
         else
         {

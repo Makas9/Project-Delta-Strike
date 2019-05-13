@@ -25,7 +25,7 @@ public class VestSlot : ShopSlot {
             Data.Instance.Money -= Price;
             Manager.MoneyDisplay.UpdateMoney();
             Debug.Log(Name);
-            Data.Instance.AddGun(Name);
+            Data.Instance.PlayerData.AddItemToInventoryDB(Name);
         }
         else
         {

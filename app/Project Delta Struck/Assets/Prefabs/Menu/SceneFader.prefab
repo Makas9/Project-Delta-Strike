@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c251c9e3a00a6b74d8f7e0db484bbfe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 114650190123080904, guid: 3e96add581528d548b9ce072830a26c2, type: 2}
+  img: {fileID: 114476403248379360}
   curve:
     serializedVersion: 2
     m_Curve:

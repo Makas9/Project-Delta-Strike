@@ -72,6 +72,7 @@ public class CharacterController2D : MonoBehaviour
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
+                print("overlapping");
 				crouch = true;
 			}
 		}
@@ -79,7 +80,6 @@ public class CharacterController2D : MonoBehaviour
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
-
 			// If crouching
 			if (crouch)
 			{
@@ -92,7 +92,8 @@ public class CharacterController2D : MonoBehaviour
 				// Reduce the speed by the crouchSpeed multiplier
 				move *= m_CrouchSpeed;
 
-				// Disable one of the colliders when crouching
+                // Disable one of the colliders when crouching
+                print("Disabling col");
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
 			} else
