@@ -30,10 +30,11 @@ public class Gun : MonoBehaviour {
 
     IEnumerator Shoot()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, transform.right);
 
         if (hitInfo)
         {
+            print(hitInfo.collider.name);
             Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
