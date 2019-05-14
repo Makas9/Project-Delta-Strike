@@ -42,17 +42,8 @@ public class PlayerMovement : MonoBehaviour {
             Debug.Log("NOT crouching");
 			crouch = false;
         }
-
-        if (HasFallen())
-        {
-            Respawn();
-        }
     }
 
-    public bool HasFallen()
-    {
-        return transform.position.y < -5;
-    }
 
     public void Respawn()
     {
@@ -61,7 +52,6 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator LateRespawn()
     {
-        Camera2DFollow.Instance.enabled = false;
         controller.m_Rigidbody2D.freezeRotation = false;
         animator.SetTrigger("Fall");
         yield return new WaitForSecondsRealtime(SecondsToRespawn);
