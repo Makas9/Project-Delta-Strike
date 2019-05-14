@@ -406,15 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d557d374705146aff485e78b83cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  speed: 7
-=======
   speed: 10
->>>>>>> 0b105235cea224e176c71a618057c8472fe7ca6c
-=======
-  speed: 10
->>>>>>> c37aabfdd3dc626ebba0d261a335084336c48fa7
   JustTurnedAround: 0
   TurnAroundDuration: 1
   health: 100

@@ -13,7 +13,6 @@ public class CollectableItem : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-
     protected void PickUp()
     {
         animator.SetTrigger("ElementPickUp");

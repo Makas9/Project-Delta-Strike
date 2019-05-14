@@ -9,11 +9,13 @@ public class Goal : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (reached) return;
+        if (!col.transform.CompareTag("Player")) return;
         reached = true;
         int scene = int.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name) +1;
+        SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
         SceneFader.Instance.FadeTo(scene.ToString());
     }
 }

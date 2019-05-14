@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  yOffset: 75
+  yOffset: 2
 --- !u!114 &114852566828406592
 MonoBehaviour:
   m_ObjectHideFlags: 1
