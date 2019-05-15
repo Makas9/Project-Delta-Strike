@@ -35,22 +35,15 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (Input.GetButtonDown("Crouch"))
 		{
+            Debug.Log("crouching");
 			crouch = true;
 		} else if (Input.GetButtonUp("Crouch"))
 		{
+            Debug.Log("NOT crouching");
 			crouch = false;
-		}
-
-        if (HasFallen())
-        {
-            Respawn();
         }
     }
 
-    public bool HasFallen()
-    {
-        return transform.position.y < -5;
-    }
 
     public void Respawn()
     {
@@ -59,7 +52,6 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator LateRespawn()
     {
-        Camera2DFollow.Instance.enabled = false;
         controller.m_Rigidbody2D.freezeRotation = false;
         animator.SetTrigger("Fall");
         yield return new WaitForSecondsRealtime(SecondsToRespawn);
@@ -70,7 +62,6 @@ public class PlayerMovement : MonoBehaviour {
         }
         animator.SetTrigger("StandUp");
         controller.m_Rigidbody2D.freezeRotation = true;
-        Camera2DFollow.Instance.enabled = true;
     }
 
     public void OnLanding ()
