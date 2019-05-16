@@ -54,7 +54,7 @@ class User implements UserInterface
     private $roles;
 
     /**
-     * @ORM\Column(type="text", nullable=false)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $avatar;
 
@@ -63,12 +63,22 @@ class User implements UserInterface
      */
     private $level = 1;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $achievements; // [IMPORTANT] Change type to object when migrating; (Database: [ 1, 2, n ]; n - completed achievement);
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
     }
 
     // other properties and methods
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getEmail()
     {
@@ -129,7 +139,7 @@ class User implements UserInterface
     public function getAvatar(): ?string
     {
         if($this->avatar === null) {
-            return "build/images/unknown-avatar.svg";
+            return "/build/images/unknown-avatar.svg";
         }
 
         return '/uploads/avatars/'.$this->avatar;
@@ -150,6 +160,18 @@ class User implements UserInterface
     public function setLevel(int $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getAchievements()
+    {
+        return $this->achievements;
+    }
+
+    public function setAchievements($achievements): self
+    {
+        $this->achievements = $achievements;
 
         return $this;
     }

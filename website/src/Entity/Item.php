@@ -32,19 +32,58 @@ class Item
     private $descripton;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $offensive;
+    private $image;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json")
      */
-    private $defensive;
+    private $stats; // [IMPORTANT] Change type to object when migrating; (Database: { "damage": 10, "fire-rate": 0.1, "something": 1 }, { n }, { n+1 } }; n - items);
 
     public function getId()
     {
         return $this->id;
     }
 
-    // ... getter and setter methods
+    public function getItem()
+    {
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getDescription()
+    {
+        return $this->descripton;
+    }
+
+    public function getImage(): ?string
+    {
+        if($this->image === null) {
+            return "/build/images/unknown-avatar.svg";
+        }
+
+        return '/uploads/avatars/'.$this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getStats()
+    {
+        return $this->stats;
+    }
 }

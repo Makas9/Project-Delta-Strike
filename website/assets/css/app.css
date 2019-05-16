@@ -69,3 +69,7 @@ header, main, footer {
 #header {
   border-bottom: 1px solid rgba(0,0,0,0.14);
 }
+
+.no-padding {
+    padding: 0px !important;
+}
