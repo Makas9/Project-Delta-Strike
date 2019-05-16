@@ -1,5 +1,5 @@
 <?php
-    $con = mysqli_connect('server223.hostinger.lt', 'u484157030_delst', 'u484157030_admin', 'MercyKill2020');
+    $con = mysqli_connect('localhost', 'u484157030_admin', 'MercyKill2020', 'u484157030_delst');
     if (mysqli_connect_errno())
     {
         echo "1: Connection failed";
