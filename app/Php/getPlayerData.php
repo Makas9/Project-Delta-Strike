@@ -1,5 +1,5 @@
 <?php
-    $con = mysqli_connect('tommy.heliohost.org', 'kosbud_admin', 'admin123admin', 'kosbud_uniproject');
+    $con = mysqli_connect('localhost', 'u484157030_admin', 'MercyKill2020', 'u484157030_del2');
     if (mysqli_connect_errno())
     {
         echo "1: Connection failed";
