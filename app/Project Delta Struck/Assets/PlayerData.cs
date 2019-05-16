@@ -16,6 +16,7 @@ public class PlayerData
     public string CurrentVest;
     public string CurrentGun;
     public string CurrentKnife;
+   
     public GrenadeData CurrentGrenades;
 
     public PlayerData(string CurrentVest, string CurrentGun, string CurrentKnife, string Username)

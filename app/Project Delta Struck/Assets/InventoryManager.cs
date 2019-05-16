@@ -24,7 +24,6 @@ public class InventoryManager : MonoBehaviour {
         else
         {
             print("Items were not loaded");
-            Data.Instance.ItemsLoaded = true;
         }
     }
 

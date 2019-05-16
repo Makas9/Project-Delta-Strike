@@ -121,6 +121,7 @@ public class SaveSystem : MonoBehaviour
         WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/getUserItems.php", form);
         yield return www;
         Debug.Log(www.text);
+        Data.Instance.ItemsLoaded = true;
         SetUserItems(www.text);
     }
 

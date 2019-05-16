@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour {
     void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Data.Instance.LevelEnemiesKilled++;
         Destroy(HealthBar.transform.parent.gameObject);
         Destroy(gameObject);
     }

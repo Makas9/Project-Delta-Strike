@@ -7,7 +7,7 @@ public class NumberLevels : MonoBehaviour {
     void Awake()
     {
         var buttons = GetComponentsInChildren<Text>();
-        int levelReached = 1;
+        int levelReached = Data.Instance.PlayerData.LevelReached;
 
         for (int i = 0; i < buttons.Length; i++)
         {
