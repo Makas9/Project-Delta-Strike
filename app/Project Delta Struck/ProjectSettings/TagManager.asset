@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Parallax
   - Ground
+  - EndLevelElement
   layers:
   - Default
   - TransparentFX
