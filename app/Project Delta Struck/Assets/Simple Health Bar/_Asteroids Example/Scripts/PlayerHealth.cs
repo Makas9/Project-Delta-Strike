@@ -31,16 +31,28 @@ public class PlayerHealth : MonoBehaviour
 
 	void Start ()
 	{
-		// Set the current health and shield to max values.
-		currentHealth = maxHealth;
+        SaveSystem.Instance.CallGetItems();
+        StartCoroutine(LoadDataInitBar());
+    }
+
+    IEnumerator LoadDataInitBar()
+    {
+        // Set the current health and shield to max values.
+        currentHealth = maxHealth;
         if (Data.Instance != null)
+        {
+            while (!Data.Instance.ItemsLoaded)
+            {
+                yield return null;
+            }
             reloadTime = currentAmmo = Data.Instance.GetGunSettings(Data.Instance.CurrentGun).gunStats.ReloadTime;
+        }
         else
             reloadTime = currentAmmo = 0.4f;
         // Update the Simple Health Bar with the updated values of Health and Shield.
-        healthBar.UpdateBar( currentHealth, maxHealth );
-		ammoBar.UpdateBar( currentAmmo, reloadTime );
-	}
+        healthBar.UpdateBar(currentHealth, maxHealth);
+        ammoBar.UpdateBar(currentAmmo, reloadTime);
+    }
 
 	public void HealPlayer ()
 	{

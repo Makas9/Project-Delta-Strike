@@ -19,13 +19,16 @@ public class GunSlot : ShopSlot {
     public override void Buy()
     {
         string Name = GetTitle().text;
-        float Price = Data.Instance.GetGrenadeSettings(Name).stats.Price;
+        float Price = Data.Instance.GetGunSettings(Name).gunStats.Price;
         if (Price <= Data.Instance.Money)
         {
             Data.Instance.Money -= Price;
             Manager.MoneyDisplay.UpdateMoney();
             Debug.Log(Name);
             Data.Instance.PlayerData.AddItemToInventoryDB(Name);
+
+            Data.Instance.ItemsLoaded = true;
+
         }
         else
         {

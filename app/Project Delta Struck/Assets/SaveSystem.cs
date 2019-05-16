@@ -33,7 +33,7 @@ public class SaveSystem : MonoBehaviour
         WWWForm form = new WWWForm();
         Debug.Log(DBManager.username);
         form.AddField("username", DBManager.username);
-        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/getPlayerData.php", form);
+        WWW www = new WWW("http://Mart13s.lt/getPlayerData.php", form);
         yield return www;
         Debug.Log(www.text);
         PlayerData data = JsonUtility.FromJson<PlayerData>(www.text);
@@ -47,7 +47,7 @@ public class SaveSystem : MonoBehaviour
         {
             Data.Instance.PlayerData = data;
         }
-
+        Data.Instance.PlayerDataLoaded = true;
         Debug.Log("PlayerLoaded");
     }
 
@@ -63,16 +63,11 @@ public class SaveSystem : MonoBehaviour
         form.AddField("username", DBManager.username);
         form.AddField("data", JsonUtility.ToJson(playerData));
         Debug.Log(JsonUtility.ToJson(playerData));
-        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/uploadPlayerData.php", form);
+        WWW www = new WWW("http://Mart13s.lt/uploadPlayerData.php", form);
         yield return www;
         Debug.Log(www.text);
     }
 
-    public void LoadPlayer()
-    {
-        CallGetItems();
-        CallGetData();
-    }
     /// <summary>
     /// Adds item to `item` table in dababase
     /// </summary>
@@ -87,7 +82,7 @@ public class SaveSystem : MonoBehaviour
         Debug.Log(DBManager.username);
         form.AddField("username", DBManager.username);
         form.AddField("item", itemName);
-        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/uploadUserItem.php", form);
+        WWW www = new WWW("http://u484157030.hostingerapp.com/uploadUserItem.php", form);
         yield return www;
         Debug.Log(www.text);
     }
@@ -102,7 +97,7 @@ public class SaveSystem : MonoBehaviour
         WWWForm form = new WWWForm();
         Debug.Log(DBManager.username);
         form.AddField("username", DBManager.username);
-        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/getAllItems.php", form);
+        WWW www = new WWW("http://u484157030.hostingerapp.com/getAllItems.php", form);
         yield return www;
         Debug.Log(www.text);
         FromJsonToObjects(www.text);
@@ -113,15 +108,16 @@ public class SaveSystem : MonoBehaviour
         StartCoroutine(GetUserItems());
     }
 
-    IEnumerator GetUserItems()
+    public IEnumerator GetUserItems()
     {
         WWWForm form = new WWWForm();
         Debug.Log(DBManager.username);
         form.AddField("username", DBManager.username);
-        WWW www = new WWW("http://codeblacksmith.tk/ProjectDeltaStruct/getUserItems.php", form);
+        WWW www = new WWW("http://u484157030.hostingerapp.com/getUserItems.php", form);
         yield return www;
         Debug.Log(www.text);
         SetUserItems(www.text);
+        Data.Instance.ItemsLoaded = true;
     }
 
     public void SetUserItems(string list)

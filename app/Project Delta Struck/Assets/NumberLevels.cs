@@ -6,8 +6,28 @@ using UnityEngine.UI;
 public class NumberLevels : MonoBehaviour {
     void Awake()
     {
+        if (Data.Instance.PlayerDataLoaded)
+        {
+            NumberLvls(Data.Instance.PlayerData.LevelReached);
+        }
+        else
+        {
+            SaveSystem.Instance.CallGetData();
+            StartCoroutine(WaitForPlayerData());
+        }
+    }
+
+    IEnumerator WaitForPlayerData()
+    {
+        while (!Data.Instance.PlayerDataLoaded)
+            yield return null;
+        print(Data.Instance.PlayerData.LevelReached);
+        NumberLvls(Data.Instance.PlayerData.LevelReached);
+    }
+
+    public void NumberLvls(int levelReached)
+    {
         var buttons = GetComponentsInChildren<Text>();
-        int levelReached = Data.Instance.PlayerData.LevelReached;
 
         for (int i = 0; i < buttons.Length; i++)
         {

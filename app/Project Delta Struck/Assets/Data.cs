@@ -16,6 +16,7 @@ public class Data : MonoBehaviour
     public PlayerData PlayerData;
     [HideInInspector]
     public bool ItemsLoaded = false;
+    public bool PlayerDataLoaded = false;
     public int LevelEnemiesKilled;
     public int LevelCoinsCollected;
     private void Awake()

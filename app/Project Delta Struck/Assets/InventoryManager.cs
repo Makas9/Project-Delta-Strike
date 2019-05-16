@@ -23,8 +23,19 @@ public class InventoryManager : MonoBehaviour {
         }
         else
         {
-            print("Items were not loaded");
+            SaveSystem.Instance.CallGetItems();
+            StartCoroutine(RefreshItems());
         }
+    }
+
+    public IEnumerator RefreshItems()
+    {
+        while (!Data.Instance.ItemsLoaded)
+        {
+            print("items not loaded return");
+            yield return null;
+        }
+        FIllInventoryWithData();
     }
 
 
