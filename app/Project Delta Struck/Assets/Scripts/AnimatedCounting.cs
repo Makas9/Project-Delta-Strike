@@ -5,13 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 public class AnimatedCounting : MonoBehaviour {
 
-    TextMeshProUGUI m;
+    Text m;
     public float CountInSeconds;
     public float Value;
     float CountingInterval;
     void OnEnable()
     {
-        m = GetComponent<TextMeshProUGUI>();
+        m = GetComponent<Text>();
         CountingInterval = CountInSeconds / Value;
         StartCoroutine(AnimateText());
         

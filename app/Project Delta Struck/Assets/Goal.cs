@@ -16,6 +16,6 @@ public class Goal : MonoBehaviour {
         reached = true;
         int scene = int.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name) +1;
         SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
-        SceneFader.Instance.FadeTo(scene.ToString());
+        GameMaster.Instance.LevelEnded(true);
     }
 }

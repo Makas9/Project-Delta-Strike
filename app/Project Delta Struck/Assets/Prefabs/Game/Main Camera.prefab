@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1416825268573322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.05, y: -0.02999988, z: -9.902344}
+  m_LocalPosition: {x: -61.3, y: 7.88, z: -9.902344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -142,3 +142,8 @@ MonoBehaviour:
   GameCanvas: {fileID: 0}
   Camera: {fileID: 0}
   moneyTxt: {fileID: 0}
+  EnemiesKilled: {fileID: 0}
+  CoinsCollected: {fileID: 0}
+  endLevelUI: {fileID: 0}
+  EndLevelElements: {fileID: 0}
+  nextLevelBtn: {fileID: 0}

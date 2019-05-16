@@ -8,7 +8,7 @@ public class EnableQueue : MonoBehaviour {
     RectTransform[] objects;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         objects = Container.GetComponentsInChildren<RectTransform>(true);
         AllowedTags.Add("EndLevelElement");

@@ -38,7 +38,7 @@ public class GameMaster : MonoBehaviour {
     /// </summary>
     /// <param name="reason">Why the level ended</param>
     /// <param name="win">Was the level failed or won</param>
-    public void LevelEnded(string reason, bool win)
+    public void LevelEnded(bool win)
     {
         {
             nextLevelBtn.SetActive(win);

@@ -98,7 +98,8 @@ public class PlayerHealth : MonoBehaviour
 
 	public void Death ()
 	{
-	}
+        GameMaster.Instance.LevelEnded(false);
+    }
 
     IEnumerator ReloadBar(SimpleHealthBar bar)
     {
