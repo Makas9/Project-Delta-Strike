@@ -8,7 +8,7 @@
     
     $username = $_POST["username"];
     $data = $_POST["data"];
-    $sql = "SELECT FROM `playerData` username, data WHERE username=" . $username;
+    $sql = "SELECT username, data FROM `playerData` WHERE username='" . $username . "'";
     $result = mysqli_query($con, $sql);
     //echo $result;
     if ($result) {
@@ -18,6 +18,9 @@
     
         /* free result set */
         $result->free();
+    }
+    else {
+        echo mysqli_connect_error();
     }
     mysqli_close($con);
 ?>
