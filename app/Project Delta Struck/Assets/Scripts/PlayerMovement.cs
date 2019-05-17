@@ -62,7 +62,6 @@ public class PlayerMovement : MonoBehaviour {
         }
         animator.SetTrigger("StandUp");
         controller.m_Rigidbody2D.freezeRotation = true;
-        Camera2DFollow.Instance.enabled = true;
     }
 
     public void OnLanding ()

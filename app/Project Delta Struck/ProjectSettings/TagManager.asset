@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Parallax
   - Ground
+  - EndLevelElement
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
+  - Collectable
   - 
   - 
   - 

@@ -31,5 +31,14 @@ class Achievement
         return $this->id;
     }
 
+    public function getName(){
+        return $this->name;
+    }
+
+    public function getDescription(){
+        return $this->descripton;
+    }
+
+
     // ... getter and setter methods
 }

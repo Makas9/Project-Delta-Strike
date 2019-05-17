@@ -13,10 +13,39 @@
         <div class="col s12 m8 offset-m1 xl7 offset-xl1">
             <div class="row section">
                 <div class="col s12">
+                    <span style="color: rgba(167, 167, 167, 0.87);">Sent</span>
                     <ul class="collection">
-                        <li class="collection-item">Username offers you 1 item<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item">Username offers you 1 item<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item">Username offers you 1 item<a class="secondary-content"><i class="material-icons">add</i></a></li>
+                        {% if sent %}
+                            {% for trade in sent %}
+                                <li class="collection-item">Sent trade offer #{{ trade.getId() }} to <i>{{ UserServices.getUserById(trade.getTo()) }}</i> <a href="/trade/cancel/{{ trade.getId() }}" target="_blank" class="secondary-content">Cancel</a></li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">You have no sent trade offers!</li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col s12">
+                    <span style="color: rgba(167, 167, 167, 0.87);">Active</span>
+                    <ul class="collection">
+                        {% if active %}
+                            {% for trade in active %}
+                                <li class="collection-item">Pending trade offer #{{ trade.getId() }} from <i>{{ UserServices.getUserById(trade.getFrom()) }}</i> <a href="/trade/{{ trade.getId() }}" target="_blank" class="secondary-content">Open</a></li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">You have no active trade offers!</li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col s12">
+                    <span style="color: rgba(167, 167, 167, 0.87);">Completed</span>
+                    <ul class="collection">
+                        {% if completed %}
+                            {% for trade in completed %}
+                                <li class="collection-item">Trade offer #{{ trade.getId() }} from {{ UserServices.getUserById(trade.getFrom()) }}<a class="secondary-content" style="color: rgba(167, 167, 167, 0.87);">{{ trade.statusToString() }}</a></li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="collection-item" style="color: rgba(187, 187, 187, 0.87);">No trades to show!</li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -27,8 +56,17 @@
 <div id="modal-trading" class="modal">
     <div class="modal-content">
         <h4>Send Trade Offer</h4>
-        <p>Hello!</p>
+        <input id="username" name="username" type="text" class="validate">
+        <label for="username">Enter player username</label> <br />
+        <a id="submit" class="waves-effect waves-light btn" onClick="sendTradeOffer()">Send trade offer</a>
     </div>
+    <script>
+        function sendTradeOffer(){
+            if(document.getElementById("username").value){
+                location.href = "/sendtrade/"+document.getElementById("username").value;
+            }
+        }
+    </script>
     <div class="modal-footer">
         <a href="#" class="modal-close waves-effect waves-green btn-flat">Close</a>
     </div>

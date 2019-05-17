@@ -26,6 +26,9 @@ public class VestSlot : ShopSlot {
             Manager.MoneyDisplay.UpdateMoney();
             Debug.Log(Name);
             Data.Instance.PlayerData.AddItemToInventoryDB(Name);
+
+            Data.Instance.ItemsLoaded = true;
+
         }
         else
         {
