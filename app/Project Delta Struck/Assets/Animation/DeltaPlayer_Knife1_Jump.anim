@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DeltaPlayer_Idle
+  m_Name: DeltaPlayer_Knife1_Jump
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,11 +19,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: ef431f0b836ab474e94f6ce5195ed16e, type: 3}
+      value: {fileID: 21300000, guid: 3ad448b078b3e2c448d5d15ed6a355d4, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 977195b1ec5ea874097847f7ec0010cf, type: 3}
+      value: {fileID: 21300000, guid: 47c54c70294cd014b817e5c31f8dcff4, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: ef431f0b836ab474e94f6ce5195ed16e, type: 3}
+      value: {fileID: 21300000, guid: fa211ef4893d3124082b2c2edc4e9899, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -43,9 +43,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: ef431f0b836ab474e94f6ce5195ed16e, type: 3}
-    - {fileID: 21300000, guid: 977195b1ec5ea874097847f7ec0010cf, type: 3}
-    - {fileID: 21300000, guid: ef431f0b836ab474e94f6ce5195ed16e, type: 3}
+    - {fileID: 21300000, guid: 3ad448b078b3e2c448d5d15ed6a355d4, type: 3}
+    - {fileID: 21300000, guid: 47c54c70294cd014b817e5c31f8dcff4, type: 3}
+    - {fileID: 21300000, guid: fa211ef4893d3124082b2c2edc4e9899, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
