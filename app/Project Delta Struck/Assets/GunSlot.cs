@@ -26,8 +26,8 @@ public class GunSlot : ShopSlot {
             Manager.MoneyDisplay.UpdateMoney();
             Debug.Log(Name);
             Data.Instance.PlayerData.AddItemToInventoryDB(Name);
-
-            Data.Instance.ItemsLoaded = true;
+            SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
+            Data.Instance.ItemsLoaded = false;
 
         }
         else

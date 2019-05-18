@@ -19,15 +19,15 @@ public class KnifeSlot : ShopSlot {
     public override void Buy()
     {
         string Name = GetTitle().text;
-        float Price = Data.Instance.GetGrenadeSettings(Name).stats.Price;
+        float Price = Data.Instance.GetKnifeSettings(Name).knifeStats.Price;
         if (Price <= Data.Instance.Money)
         {
             Data.Instance.Money -= Price;
             Manager.MoneyDisplay.UpdateMoney();
             Debug.Log(Name);
             Data.Instance.PlayerData.AddItemToInventoryDB(Name);
-
-            Data.Instance.ItemsLoaded = true;
+            SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
+            Data.Instance.ItemsLoaded = false;
 
         }
         else

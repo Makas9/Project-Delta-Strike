@@ -11,6 +11,7 @@ public class GameMaster : MonoBehaviour {
     public Canvas GameCanvas;
     public CinemachineVirtualCamera Camera;
     public Text moneyTxt;
+    public Text Title;
     public AnimatedCounting EnemiesKilled;
     public AnimatedCounting CoinsCollected;
     public GameObject endLevelUI;
@@ -41,6 +42,14 @@ public class GameMaster : MonoBehaviour {
     public void LevelEnded(bool win)
     {
         {
+            if (win)
+            {
+                Title.text = "Level completed";
+            }
+            else
+            {
+                Title.text = "Player died";
+            }
             nextLevelBtn.SetActive(win);
             EnemiesKilled.Value = Data.Instance.LevelEnemiesKilled;
             CoinsCollected.Value = Data.Instance.LevelCoinsCollected;

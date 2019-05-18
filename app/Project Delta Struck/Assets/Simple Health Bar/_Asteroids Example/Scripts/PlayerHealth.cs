@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     bool canTakeDamage = true;
 
 	public int maxHealth = 100;
-	float currentHealth = 0;
+	float currentHealth = 100;
 
     float currentAmmo = 0;
 	float reloadTime = 1.0f;
@@ -98,6 +98,8 @@ public class PlayerHealth : MonoBehaviour
 
 	public void Death ()
 	{
+        PlayerMovement.Instance.controller.m_Rigidbody2D.freezeRotation = false;
+        PlayerMovement.Instance.controller.m_Rigidbody2D.AddTorque(200);
         GameMaster.Instance.LevelEnded(false);
     }
 

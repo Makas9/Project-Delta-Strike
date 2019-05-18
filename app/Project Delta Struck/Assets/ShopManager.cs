@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour {
-    public enum Shop { Guns, Grenades, Knives, Vests }
+    public enum Shop { Guns, Grenades, Knives, Vests, Halmets }
     public string ShopTitle = "Shop";
     public bool TopRightBar = true;
     public Transform SelectedOverlay;
@@ -39,6 +39,9 @@ public class ShopManager : MonoBehaviour {
             case Shop.Vests:
                 Items = Data.Instance.Vests;
                 break;
+            case Shop.Halmets:
+                Items = Data.Instance.Halmets;
+                break;
         }
     }
 
@@ -52,7 +55,10 @@ public class ShopManager : MonoBehaviour {
             slot.Fill(item);
             Slots.Add(slot);
         }
-        Slots[0].Select();
+        if (Items.Length > 0)
+        {
+            Slots[0].Select();
+        }
         UpperRightLbl.transform.parent.gameObject.SetActive(TopRightBar);
     }
 }

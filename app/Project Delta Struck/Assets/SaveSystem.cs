@@ -40,7 +40,7 @@ public class SaveSystem : MonoBehaviour
         if (data == null)
         {
             Debug.Log("data was null");
-            Data.Instance.PlayerData = new PlayerData("Vest", "M9", "Wooden knife", DBManager.username);
+            Data.Instance.PlayerData = new PlayerData("Simple vest", "Glock", "Assasin knife", "Bicycle helmet", DBManager.username);
             CallUploadData(Data.Instance.PlayerData);
         }
         else
@@ -151,35 +151,43 @@ public class SaveSystem : MonoBehaviour
             print("ImgUrl: " + ImgUrl);
             print("objecet: " + Object);
             //Sprite spriteFromUrl = GetSprite(ImgUrl, value => spriteFromUrl = value);
+            string imagesPath = "ItemsImages/";
             switch (Type)
             {
                 case "Gun":
                     GunStats gunStats = JsonUtility.FromJson<GunStats>(Object);
                     GunSettings gun = ScriptableObject.CreateInstance<GunSettings>();
                     gun.Fill(gunStats, Name, Description);
-                    //gun.Sprite = spriteFromUrl;
+                    gun.Sprite = Resources.Load<Sprite>(imagesPath + gun.Name);
                     Data.Instance.AddGun(gun);
                     break;
                 case "Vest":
                     VestStats vestStats = JsonUtility.FromJson<VestStats>(Object);
                     VestSettings vest = ScriptableObject.CreateInstance<VestSettings>();
-                    //vest.Sprite = spriteFromUrl;
                     vest.Fill(Name, Description, vestStats);
+                    vest.Sprite = Resources.Load<Sprite>(imagesPath + vest.Name);
                     Data.Instance.AddVest(vest);
                     break;
                 case "Knife":
                     KnifeStats knifeStats = JsonUtility.FromJson<KnifeStats>(Object);
                     KnifeSettings knife = ScriptableObject.CreateInstance<KnifeSettings>();
                     knife.Fill(knifeStats, Name, Description);
-                    //knife.Sprite = spriteFromUrl;
+                    knife.Sprite = Resources.Load<Sprite>(imagesPath + knife.Name);
                     Data.Instance.AddKnife(knife);
                     break;
                 case "Grenade":
                     GrenadeStats grenadeStats = JsonUtility.FromJson<GrenadeStats>(Object);
                     GrenadeSettings grenade = ScriptableObject.CreateInstance<GrenadeSettings>();
                     grenade.Fill(grenadeStats, Name, Description);
-                    //grenade.Sprite = spriteFromUrl;
+                    grenade.Sprite = Resources.Load<Sprite>(imagesPath + grenade.Name);
                     Data.Instance.AddGrenade(grenade);
+                    break;
+                case "Halmet":
+                    HalmetStats helmetStats = JsonUtility.FromJson<HalmetStats>(Object);
+                    HalmetSettings helmet = ScriptableObject.CreateInstance<HalmetSettings>();
+                    helmet.Fill(Name, Description, helmetStats);
+                    helmet.Sprite = Resources.Load<Sprite>(imagesPath + helmet.Name);
+                    Data.Instance.AddHalmet(helmet);
                     break;
                 default:
                     Debug.Log("Unrecognised item type");

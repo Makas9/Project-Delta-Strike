@@ -34,6 +34,7 @@ public class UserManager : MonoBehaviour {
         if (www.text.StartsWith("Valid"))
         {
             DBManager.username = usernameField.text;
+            SaveSystem.Instance.CallGetItems();
             SceneFader.Instance.FadeTo("MainMenu");
         }
         else

@@ -12,18 +12,20 @@ public class PlayerData
     public int VestsCount;
     public int GunsCount;
     public int KnivesCount;
-    public int GrenadesCount;
     public string CurrentVest;
     public string CurrentGun;
     public string CurrentKnife;
+    public string CurrentGrenade;
+    public string CurrentHalmet;
     public GrenadeData CurrentGrenades;
 
-    public PlayerData(string CurrentVest, string CurrentGun, string CurrentKnife, string Username)
+    public PlayerData(string CurrentVest, string CurrentGun, string CurrentKnife, string CurrentHalmet, string Username)
     {
 
         this.CurrentVest  = CurrentVest;
         this.CurrentGun   = CurrentGun;
         this.CurrentKnife = CurrentKnife;
+        this.CurrentHalmet = CurrentHalmet;
         this.Username = Username;
     }
 

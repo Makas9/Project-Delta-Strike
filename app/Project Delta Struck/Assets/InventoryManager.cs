@@ -11,9 +11,9 @@ public class InventoryManager : MonoBehaviour {
     public Transform KnivesScrollRect;
     public Transform VestsScrollRect;
     public Transform GrenadesScrollRect;
+    public Transform HalmetsScrollRect;
     public GameObject ListItem;
 
-    
     // Use this for initialization
     void Start() {
         if (Data.Instance.ItemsLoaded)
@@ -23,7 +23,7 @@ public class InventoryManager : MonoBehaviour {
         }
         else
         {
-            SaveSystem.Instance.CallGetItems();
+            SaveSystem.Instance.CallGetUserItems();
             StartCoroutine(RefreshItems());
         }
     }
@@ -45,12 +45,31 @@ public class InventoryManager : MonoBehaviour {
         Transform KnivesContent = KnivesScrollRect.Find("Content");
         Transform GrenadesContent = GrenadesScrollRect.Find("Content");
         Transform VestsContent = VestsScrollRect.Find("Content");
+        Transform HalmetsContent = HalmetsScrollRect.Find("Content");
+
+        ToggleGroup TGGunsContent = GunsScrollRect.Find("Content").GetComponent<ToggleGroup>();
+        ToggleGroup TGKnivesContent   = KnivesScrollRect.Find("Content").GetComponent<ToggleGroup>();
+        ToggleGroup TGGrenadesContent = GrenadesScrollRect.Find("Content").GetComponent<ToggleGroup>();
+        ToggleGroup TGVestsContent    = VestsScrollRect.Find("Content").GetComponent<ToggleGroup>();
+        ToggleGroup TGHalmetsContent  = HalmetsScrollRect.Find("Content").GetComponent<ToggleGroup>();
         foreach (var item in Data.Instance.Guns)
         {
             if (Data.Instance.userItems.Contains(item.Name))
             {
                 GameObject listItem = Instantiate(ListItem, GunsContent);
                 listItem.transform.Find("Label").GetComponent<Text>().text = item.Name;
+                Toggle t = listItem.GetComponent<Toggle>();
+                t.group = TGGunsContent;
+                t.isOn = Data.Instance.CurrentGun == item.Name;
+                t.onValueChanged.AddListener(delegate {
+                    if (t.isOn)
+                    {
+                        Data.Instance.PlayerData.CurrentGun = item.Name;
+                    }
+                    else
+                    {
+                    }
+                });
             }
         }
         foreach (var item in Data.Instance.Knives)
@@ -59,19 +78,39 @@ public class InventoryManager : MonoBehaviour {
             {
                 GameObject listItem = Instantiate(ListItem, KnivesContent);
                 listItem.transform.Find("Label").GetComponent<Text>().text = item.Name;
+                Toggle t = listItem.GetComponent<Toggle>();
+                t.group = TGKnivesContent;
+                t.isOn = Data.Instance.CurrentKnife == item.Name;
+                t.onValueChanged.AddListener(delegate {
+                    if (t.isOn)
+                    {
+                        Data.Instance.PlayerData.CurrentKnife = item.Name;
+                    }
+                    else
+                    {
+                    }
+                });
             }
         }
 
         foreach (var item in Data.Instance.Grenades)
         {
-            print("grenade");
             if (Data.Instance.userItems.Contains(item.Name))
             {
-                for (int i = 0; i < Data.Instance.userItems.Count(s => s == item.Name); i++)
-                {
-                    GameObject listItem = Instantiate(ListItem, GrenadesContent);
-                    listItem.transform.Find("Label").GetComponent<Text>().text = item.Name;
-                }
+                GameObject listItem = Instantiate(ListItem, GrenadesContent);
+                listItem.transform.Find("Label").GetComponent<Text>().text = item.Name;
+                Toggle t = listItem.GetComponent<Toggle>();
+                t.group = TGGrenadesContent;
+                t.isOn = Data.Instance.CurrentGrenade == item.Name;
+                t.onValueChanged.AddListener(delegate {
+                    if (t.isOn)
+                    {
+                        Data.Instance.PlayerData.CurrentGrenade = item.Name;
+                    }
+                    else
+                    {
+                    }
+                });
             }
         }
 
@@ -81,6 +120,39 @@ public class InventoryManager : MonoBehaviour {
             {
                 GameObject listItem = Instantiate(ListItem, VestsContent);
                 listItem.transform.Find("Label").GetComponent<Text>().text = item.Name;
+                Toggle t = listItem.GetComponent<Toggle>();
+                t.group = TGVestsContent;
+                t.isOn = Data.Instance.CurrentVest == item.Name;
+                t.onValueChanged.AddListener(delegate {
+                    if (t.isOn)
+                    {
+                        Data.Instance.PlayerData.CurrentVest = item.Name;
+                    }
+                    else
+                    {
+                    }
+                });
+            }
+        }
+
+        foreach (var item in Data.Instance.Halmets)
+        {
+            if (Data.Instance.userItems.Contains(item.Name))
+            {
+                GameObject listItem = Instantiate(ListItem, VestsContent);
+                listItem.transform.Find("Label").GetComponent<Text>().text = item.Name;
+                Toggle t = listItem.GetComponent<Toggle>();
+                t.group = TGHalmetsContent;
+                t.isOn = Data.Instance.CurrentHalmet == item.Name;
+                t.onValueChanged.AddListener(delegate {
+                    if (t.isOn)
+                    {
+                        Data.Instance.PlayerData.CurrentHalmet = item.Name;
+                    }
+                    else
+                    {
+                    }
+                });
             }
         }
     }

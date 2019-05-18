@@ -30,20 +30,19 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetButtonDown("Jump"))
 		{
 			jump = true;
-			animator.SetBool("IsJumping", true);
 		}
-
-		if (Input.GetButtonDown("Crouch"))
-		{
-            Debug.Log("crouching");
-			crouch = true;
-		} else if (Input.GetButtonUp("Crouch"))
-		{
-            Debug.Log("NOT crouching");
-			crouch = false;
-        }
     }
 
+    public void OnJump()
+    {
+        animator.SetTrigger("Jump");
+    }
+
+    public void OnFire()
+    {
+        print("Onfire");
+        animator.SetTrigger("Fire");
+    }
 
     public void Respawn()
     {
@@ -53,26 +52,16 @@ public class PlayerMovement : MonoBehaviour {
     IEnumerator LateRespawn()
     {
         controller.m_Rigidbody2D.freezeRotation = false;
-        animator.SetTrigger("Fall");
         yield return new WaitForSecondsRealtime(SecondsToRespawn);
         controller.m_Rigidbody2D.position = InitialPosition.position;
         if (transform.forward.x < 0)
         {
             controller.Flip();
         }
-        animator.SetTrigger("StandUp");
         controller.m_Rigidbody2D.freezeRotation = true;
     }
 
-    public void OnLanding ()
-	{
-		animator.SetBool("IsJumping", false);
-	}
 
-	public void OnCrouching (bool isCrouching)
-	{
-		animator.SetBool("IsCrouching", isCrouching);
-	}
 
 	void FixedUpdate ()
 	{

@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GrenadesShop.unity
     guid: 4257c9ed3907ef84c83c1f63628c4f72
   - enabled: 1
+    path: Assets/Scenes/HalmetsShop.unity
+    guid: f30d896131f76224badd1fb9a544f930
+  - enabled: 1
     path: Assets/Scenes/GunsShop.unity
     guid: bcdf37b897bce7440961705d74d5b895
   - enabled: 1
