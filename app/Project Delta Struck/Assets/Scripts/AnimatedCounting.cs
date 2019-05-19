@@ -12,6 +12,11 @@ public class AnimatedCounting : MonoBehaviour {
     void OnEnable()
     {
         m = GetComponent<Text>();
+        if (Value == 0)
+        {
+            m.text = "0";
+            return;
+        }
         CountingInterval = CountInSeconds / Value;
         StartCoroutine(AnimateText());
         

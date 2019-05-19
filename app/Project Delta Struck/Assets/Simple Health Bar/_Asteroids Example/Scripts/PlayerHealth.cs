@@ -67,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
 		healthBar.UpdateBar( currentHealth, maxHealth );
 	}
 
-	public void TakeDamage ( int damage )
+	public void TakeDamage ( float damage )
 	{
 		currentHealth -= damage;
 
@@ -85,7 +85,7 @@ public class PlayerHealth : MonoBehaviour
 		healthBar.UpdateBar( currentHealth, maxHealth );
 	}
 
-    public bool Fire()
+    public bool CanFire()
     {
         // If the shield is less than max, and the regen cooldown is not in effect...
         if (currentAmmo == reloadTime)

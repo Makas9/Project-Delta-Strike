@@ -20,7 +20,28 @@ public class SceneFader : MonoBehaviour {
 		StartCoroutine(FadeOut(scene));
 	}
 
-	IEnumerator FadeIn ()
+    /// <summary>
+    /// Load next level.
+    /// </summary>
+    public void NextLevel()
+    {
+        int level = int.Parse(SceneManager.GetActiveScene().name) + 1;
+        FadeTo(level.ToString());
+    }
+
+    public void RestartLevel()
+    {
+        int level = int.Parse(SceneManager.GetActiveScene().name);
+        FadeTo(level.ToString());
+    }
+
+    public void PreviousLevel()
+    {
+        int level = int.Parse(SceneManager.GetActiveScene().name)-1;
+        FadeTo(level.ToString());
+    }
+
+    IEnumerator FadeIn ()
 	{
         float t = curve.keys[curve.keys.Length - 1].value;
 		while (t > 0f)

@@ -30,6 +30,7 @@ public class GameMaster : MonoBehaviour {
     /// <param name="amount"></param>
     public void AddMoney(int amount)
     {
+        Data.Instance.LevelCoinsCollected += amount;
         Data.Instance.Money += amount;
         moneyTxt.text = Data.Instance.Money.ToString();
     }

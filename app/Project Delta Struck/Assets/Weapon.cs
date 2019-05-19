@@ -3,35 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour {
+    public static Weapon Instance;
     public enum Type { Gun, Knife }
     public Type type;
 	// Use this for initialization
 	void Start () {
+        Instance = this;
 	}
 
     public Transform firePoint;
     public int damage = 40;
     public GameObject impactEffect;
-    public GameObject MuzzleFlash;
     public LineRenderer lineRenderer;
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (!PlayerHealth.Instance.Fire()) return;
-            switch (type)
-            {
-                case Type.Gun:
-                    StartCoroutine(Shoot());
-                    StartCoroutine(EnableForFrame(MuzzleFlash));
-                    break;
-                case Type.Knife:
-                    Stab();
-                    break;
-            }
+            if (!PlayerHealth.Instance.CanFire()) return;
             PlayerMovement.Instance.OnFire();
+        }
+    }
+
+    public void Fire()
+    {
+            print(type);
+            print(transform.name);
+        switch (type)
+        {
+            case Type.Gun:
+                StartCoroutine(Shoot());
+                StartCoroutine(EnableForFrame(firePoint.gameObject));
+                break;
+            case Type.Knife:
+                Stab();
+                break;
         }
     }
 
@@ -50,7 +57,7 @@ public class Weapon : MonoBehaviour {
 
     void Stab()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, transform.right, 0.5f);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, transform.right, 0.5f, ~(1 << PlayerMovement.Instance.gameObject.layer));
 
         if (hitInfo)
         {
@@ -67,8 +74,7 @@ public class Weapon : MonoBehaviour {
 
     IEnumerator Shoot()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, transform.right);
-
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, transform.right, 200, ~(1 << PlayerMovement.Instance.gameObject.layer));
         if (hitInfo)
         {
             print(hitInfo.collider.name);
@@ -79,23 +85,28 @@ public class Weapon : MonoBehaviour {
             }
 
             Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
-
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, hitInfo.point);
+            if (lineRenderer != null)
+            {
+                lineRenderer.SetPosition(0, firePoint.position);
+                lineRenderer.SetPosition(1, hitInfo.point);
+            }
         }
         else
         {
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, firePoint.position + firePoint.right * 100);
+            if (lineRenderer != null)
+            {
+                lineRenderer.SetPosition(0, firePoint.position);
+                lineRenderer.SetPosition(1, firePoint.position + firePoint.right * 100);
+            }
         }
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = true;
 
-        lineRenderer.enabled = true;
+            yield return new WaitForSeconds(0.03f);
 
-        yield return new WaitForSeconds(0.03f);
-
-        lineRenderer.enabled = false;
-
-        
+            lineRenderer.enabled = false;
+        }
     }
 
     IEnumerator EnableForFrame(GameObject obj)

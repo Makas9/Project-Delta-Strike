@@ -40,7 +40,6 @@ public class PlayerMovement : MonoBehaviour {
 
     public void OnFire()
     {
-        print("Onfire");
         animator.SetTrigger("Fire");
     }
 
