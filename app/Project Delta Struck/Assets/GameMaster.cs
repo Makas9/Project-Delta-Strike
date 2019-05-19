@@ -17,11 +17,37 @@ public class GameMaster : MonoBehaviour {
     public GameObject endLevelUI;
     public EnableQueue EndLevelElements;
     public GameObject nextLevelBtn;
+    public GameObject Grenade;
     // Use this for initialization
     void Awake () {
         Instance = this;
         Data.Instance.PlayerData.LevelReached = int.Parse(SceneManager.GetActiveScene().name);
         moneyTxt.text = Data.Instance.PlayerData.Money.ToString();
+    }
+
+    public void ThrowGrenade()
+    {
+        GameObject grenade = Instantiate(Grenade, PlayerMovement.Instance.transform, false);
+        grenade.GetComponent<Rigidbody2D>().AddForce(PlayerMovement.Instance.controller.m_Rigidbody2D.velocity);
+    }
+
+    public void SwitchPrimaryWeapon()
+    {
+        print("Switching primary weapon");
+        if (Data.Instance.PrimaryWeapon is GunSettings)
+        {
+            Gun.Instance.gameObject.SetActive(false);
+            Knife.Instance.gameObject.SetActive(true);
+            Data.Instance.PrimaryWeapon = Data.Instance.GetKnifeSettings(Data.Instance.CurrentKnife);
+            Weapon.Instance = Knife.Instance.GetComponentInChildren<Weapon>();
+        }
+        else if (Data.Instance.PrimaryWeapon is KnifeSettings)
+        {
+            Gun.Instance.gameObject.SetActive(true);
+            Knife.Instance.gameObject.SetActive(false);
+            Data.Instance.PrimaryWeapon = Data.Instance.GetGunSettings(Data.Instance.CurrentGun);
+            Weapon.Instance = Gun.Instance.GetComponentInChildren<Weapon>();
+        }
     }
 
     /// <summary>
@@ -42,23 +68,44 @@ public class GameMaster : MonoBehaviour {
     /// <param name="win">Was the level failed or won</param>
     public void LevelEnded(bool win)
     {
+        if (win)
         {
-            if (win)
-            {
-                Title.text = "Level completed";
-            }
-            else
-            {
-                Title.text = "Player died";
-            }
-            nextLevelBtn.SetActive(win);
-            EnemiesKilled.Value = Data.Instance.LevelEnemiesKilled;
-            CoinsCollected.Value = Data.Instance.LevelCoinsCollected;
+            Title.text = "Level completed";
+        }
+        else
+        {
+            Title.text = "Player died";
+        }
+        nextLevelBtn.SetActive(win);
+        EnemiesKilled.Value = Data.Instance.LevelEnemiesKilled;
+        CoinsCollected.Value = Data.Instance.LevelCoinsCollected;
+        endLevelUI.SetActive(true);
+        EndLevelElements.StartEnabling();
+    }
+    public bool gameIsPaused = false;
+    public void Pause()
+    {
+        if (gameIsPaused)
+        {
+            Unpause();
+            return;
+        }
+        else
+        {
+            Title.text = "Game paused";
+            Title.gameObject.SetActive(true);
+            nextLevelBtn.SetActive(false);
+            nextLevelBtn.transform.parent.gameObject.SetActive(true);
             endLevelUI.SetActive(true);
-            EndLevelElements.StartEnabling();
+            gameIsPaused = true;
         }
-        {
-            //Debug.LogWarning("Level ended unexpectedly");
-        }
+    }
+
+    public void Unpause()
+    {
+        nextLevelBtn.transform.parent.gameObject.SetActive(false);
+        Title.gameObject.SetActive(false);
+        endLevelUI.SetActive(false);
+        gameIsPaused = false;
     }
 }

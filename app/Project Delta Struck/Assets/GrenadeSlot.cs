@@ -32,7 +32,7 @@ public class GrenadeSlot : ShopSlot
             Data.Instance.PlayerData.AddItemToInventoryDB(Name);
             Manager.UpperRightLbl.text = count.ToString();
             SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
-            Data.Instance.ItemsLoaded = false;
+            Data.Instance.UserItemsLoaded = false;
         }
         else
         {

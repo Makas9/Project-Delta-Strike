@@ -413,7 +413,8 @@ MonoBehaviour:
   deathEffect: {fileID: 1755349173569476, guid: 3c45864be6a059a4a82a25e285298338,
     type: 2}
   CliffDetectionDistance: 2.8
-  Damage: 10
+  Damage: 20
+  KillReward: 5
   HealthBarLocation: {fileID: 4562760892676402}
 --- !u!212 &212212770395222104
 SpriteRenderer:

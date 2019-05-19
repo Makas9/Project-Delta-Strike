@@ -31,6 +31,16 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			jump = true;
 		}
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GameMaster.Instance.SwitchPrimaryWeapon();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            GameMaster.Instance.ThrowGrenade();
+        }
     }
 
     public void OnJump()

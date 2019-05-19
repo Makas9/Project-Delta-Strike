@@ -413,7 +413,8 @@ MonoBehaviour:
   deathEffect: {fileID: 1755349173569476, guid: 3c45864be6a059a4a82a25e285298338,
     type: 2}
   CliffDetectionDistance: 1
-  Damage: 10
+  Damage: 20
+  KillReward: 5
   HealthBarLocation: {fileID: 4916268189881310}
   MaxRotationSpeed: 10000
   DefaultRotationSpeed: 0
@@ -441,6 +442,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  Overturned: 0
+  OverturnValue: 0
 --- !u!212 &212011484402276648
 SpriteRenderer:
   m_ObjectHideFlags: 1

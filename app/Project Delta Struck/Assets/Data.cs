@@ -12,14 +12,17 @@ public class Data : MonoBehaviour
     public GunSettings[] Guns;
     public KnifeSettings[] Knives;
     public HalmetSettings[] Halmets;
+    public WeaponSettings PrimaryWeapon;
     public List<string> userItems = new List<string>();
     [HideInInspector]
     public PlayerData PlayerData;
     [HideInInspector]
-    public bool ItemsLoaded = false;
+    public bool UserItemsLoaded = false;
     public bool PlayerDataLoaded = false;
     public int LevelEnemiesKilled;
     public int LevelCoinsCollected;
+    public bool ItemsLoaded;
+
     private void Awake()
     {
         if (Instance != null)
@@ -35,6 +38,8 @@ public class Data : MonoBehaviour
         //Debug.Log(JsonUtility.ToJson(Knives[0]));
         //Debug.Log(JsonUtility.ToJson(Grenades[0].stats));
     }
+
+
 
     public int GetGrenadesCount(string Name)
     {

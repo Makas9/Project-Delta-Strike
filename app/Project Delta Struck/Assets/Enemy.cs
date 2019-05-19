@@ -23,10 +23,7 @@ public class Enemy : MonoBehaviour {
     }
     public void TakeDamage(float damage)
     {
-        HalmetSettings halmet = Data.Instance.GetHalmetSettings(Data.Instance.CurrentHalmet);
-        VestSettings vest = Data.Instance.GetVestSettings(Data.Instance.CurrentVest);
-        damage -= damage * halmet.HalmetStats.Resistence;
-        damage -= damage * vest.vestStats.Resistence;
+        
         health -= damage;
         HealthBar.UpdateBar(health, 100);
         if (health <= 0)

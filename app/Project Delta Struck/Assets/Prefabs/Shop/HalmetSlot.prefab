@@ -243,7 +243,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114141853102053208}
         m_MethodName: Select
         m_Mode: 1
         m_Arguments:
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114141853102053208}
         m_MethodName: Buy
         m_Mode: 1
         m_Arguments:

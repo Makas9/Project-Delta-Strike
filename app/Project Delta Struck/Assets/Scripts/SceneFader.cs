@@ -38,7 +38,14 @@ public class SceneFader : MonoBehaviour {
     public void PreviousLevel()
     {
         int level = int.Parse(SceneManager.GetActiveScene().name)-1;
-        FadeTo(level.ToString());
+        if (level == 0)
+        {
+            FadeTo("MainMenu");
+        }
+        else
+        {
+            FadeTo(level.ToString());
+        }
     }
 
     IEnumerator FadeIn ()

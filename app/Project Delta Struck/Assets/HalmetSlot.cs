@@ -28,7 +28,7 @@ public class HalmetSlot : ShopSlot {
             Data.Instance.PlayerData.AddItemToInventoryDB(Name);
 
             SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
-            Data.Instance.ItemsLoaded = false;
+            Data.Instance.UserItemsLoaded = false;
 
         }
         else

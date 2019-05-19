@@ -28,8 +28,6 @@ public class Weapon : MonoBehaviour {
 
     public void Fire()
     {
-            print(type);
-            print(transform.name);
         switch (type)
         {
             case Type.Gun:

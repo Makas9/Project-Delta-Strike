@@ -16,13 +16,15 @@ public class InventoryManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        if (Data.Instance.ItemsLoaded)
+        if (Data.Instance.UserItemsLoaded)
         {
+            print("User items loaded already");
             FIllInventoryWithData();
             return;
         }
         else
         {
+            print("Calling get user items");
             SaveSystem.Instance.CallGetUserItems();
             StartCoroutine(RefreshItems());
         }
@@ -30,7 +32,7 @@ public class InventoryManager : MonoBehaviour {
 
     public IEnumerator RefreshItems()
     {
-        while (!Data.Instance.ItemsLoaded)
+        while (!Data.Instance.UserItemsLoaded)
         {
             print("items not loaded return");
             yield return null;
@@ -155,6 +157,10 @@ public class InventoryManager : MonoBehaviour {
                 });
             }
         }
+    }
+    public void SaveSelectedItems()
+    {
+        SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
     }
 }
 

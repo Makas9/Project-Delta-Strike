@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerData
 {
     public string Username;
-    public float Money = 1000f;
+    public float Money = 0f;
     public int LevelReached = 1;
     public int VestsCount;
     public int GunsCount;

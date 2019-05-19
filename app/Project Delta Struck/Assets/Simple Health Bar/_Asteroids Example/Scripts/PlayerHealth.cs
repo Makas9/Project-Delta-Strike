@@ -31,7 +31,10 @@ public class PlayerHealth : MonoBehaviour
 
 	void Start ()
 	{
-        SaveSystem.Instance.CallGetItems();
+        if (!Data.Instance.ItemsLoaded)
+        {
+            SaveSystem.Instance.CallGetItems();
+        }
         StartCoroutine(LoadDataInitBar());
     }
 
@@ -41,8 +44,9 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         if (Data.Instance != null)
         {
-            while (!Data.Instance.ItemsLoaded)
+            while (!Data.Instance.PlayerDataLoaded)
             {
+                print("Player data not loaded");
                 yield return null;
             }
             reloadTime = currentAmmo = Data.Instance.GetGunSettings(Data.Instance.CurrentGun).gunStats.ReloadTime;
@@ -69,7 +73,14 @@ public class PlayerHealth : MonoBehaviour
 
 	public void TakeDamage ( float damage )
 	{
-		currentHealth -= damage;
+        HalmetSettings halmet = Data.Instance.GetHalmetSettings(Data.Instance.CurrentHalmet);
+        VestSettings vest = Data.Instance.GetVestSettings(Data.Instance.CurrentVest);
+        print("halmet.HalmetStats.Resist: " + halmet.HalmetStats.Resistence + " " + halmet.Name);
+        print("vest.vestStats.Resistence: " + vest.vestStats.Resistence + " " + vest.Name);
+        damage -= damage * halmet.HalmetStats.Resistence;
+        damage -= damage * vest.vestStats.Resistence;
+        print("Taking damage: " + damage);
+        currentHealth -= damage;
 
 		// If the health is less than zero...
 		if( currentHealth <= 0 )
@@ -93,6 +104,7 @@ public class PlayerHealth : MonoBehaviour
             StartCoroutine(ReloadBar(ammoBar));
             return true;
         }
+        print("current " + currentAmmo + " reloadtime: " + reloadTime);
         return false;
     }
 

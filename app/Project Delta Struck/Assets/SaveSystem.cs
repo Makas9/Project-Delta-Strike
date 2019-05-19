@@ -101,6 +101,7 @@ public class SaveSystem : MonoBehaviour
         yield return www;
         Debug.Log(www.text);
         FromJsonToObjects(www.text);
+        Data.Instance.ItemsLoaded = true;
         CallGetUserItems();
     }
     public void CallGetUserItems()
@@ -117,7 +118,7 @@ public class SaveSystem : MonoBehaviour
         yield return www;
         Debug.Log(www.text);
         SetUserItems(www.text);
-        Data.Instance.ItemsLoaded = true;
+        Data.Instance.UserItemsLoaded = true;
     }
 
     public void SetUserItems(string list)
