@@ -2266,7 +2266,7 @@ MonoBehaviour:
   endLevelUI: {fileID: 823223081}
   EndLevelElements: {fileID: 1077806463}
   nextLevelBtn: {fileID: 823223078}
-  Grenade: {fileID: 0}
+  Grenade: {fileID: 1764541528126434, guid: 99a0f309788915f478481c7c47618c9c, type: 2}
   gameIsPaused: 1
 --- !u!114 &1077806463
 MonoBehaviour:

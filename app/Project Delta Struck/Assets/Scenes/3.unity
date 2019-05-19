@@ -3253,7 +3253,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030272702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 72.487, y: -4.04, z: -5}
+  m_LocalPosition: {x: 72.42, y: -4.47, z: -5}
   m_LocalScale: {x: 4.183, y: 4.183, z: 4.183}
   m_Children: []
   m_Father: {fileID: 1784501801}
@@ -4633,13 +4633,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2a1941d439a47af9bd0b30be2e825a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 1305161149}
   moveSpeed:
     _value: {x: 0, y: 0}
     _variable: {fileID: 0}
   _relativeSpeed:
-    _value: {x: 1, y: 0}
-    _variable: {fileID: 0}
+    _value: {x: 1, y: 1}
+    _variable: {fileID: 114787471594282392, guid: 2adce2b9febfcb246adddd3b775adaf3,
+      type: 2}
   _debug: 0
   _overrideDebugColor: 0
   _debugColor: {r: 0, g: 1, b: 1, a: 1}
@@ -4696,7 +4697,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1305161147}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 76.704, y: 5.1, z: 30}
+  m_LocalPosition: {x: 76.704, y: 3.4, z: 30}
   m_LocalScale: {x: 6, y: 6, z: 3.70944}
   m_Children: []
   m_Father: {fileID: 1614488665}
@@ -7146,6 +7147,12 @@ Prefab:
       propertyPath: Title
       value: 
       objectReference: {fileID: 104039393}
+    - target: {fileID: 114828442209155646, guid: 5ce2a5a8e34f82f489a5461db773303d,
+        type: 2}
+      propertyPath: Grenade
+      value: 
+      objectReference: {fileID: 1764541528126434, guid: 99a0f309788915f478481c7c47618c9c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce2a5a8e34f82f489a5461db773303d, type: 2}
   m_IsPrefabAsset: 0
@@ -7868,7 +7875,7 @@ MonoBehaviour:
   - {fileID: 1030272705}
   - {fileID: 1595370666}
   - {fileID: 981190644}
-  - {fileID: 1305161148}
+  - {fileID: 0}
   _syncToTrackingTarget: 0
   _setRelativeParallaxSpeed: 1
   _furthestLayer:

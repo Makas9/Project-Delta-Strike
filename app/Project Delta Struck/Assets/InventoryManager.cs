@@ -141,7 +141,7 @@ public class InventoryManager : MonoBehaviour {
         {
             if (Data.Instance.userItems.Contains(item.Name))
             {
-                GameObject listItem = Instantiate(ListItem, VestsContent);
+                GameObject listItem = Instantiate(ListItem, HalmetsContent);
                 listItem.transform.Find("Label").GetComponent<Text>().text = item.Name;
                 Toggle t = listItem.GetComponent<Toggle>();
                 t.group = TGHalmetsContent;

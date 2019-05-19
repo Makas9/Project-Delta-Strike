@@ -5435,6 +5435,12 @@ Prefab:
       propertyPath: nextLevelBtn
       value: 
       objectReference: {fileID: 299675361}
+    - target: {fileID: 114828442209155646, guid: 5ce2a5a8e34f82f489a5461db773303d,
+        type: 2}
+      propertyPath: Grenade
+      value: 
+      objectReference: {fileID: 1764541528126434, guid: 99a0f309788915f478481c7c47618c9c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce2a5a8e34f82f489a5461db773303d, type: 2}
   m_IsPrefabAsset: 0

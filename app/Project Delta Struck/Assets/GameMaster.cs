@@ -27,8 +27,12 @@ public class GameMaster : MonoBehaviour {
 
     public void ThrowGrenade()
     {
-        GameObject grenade = Instantiate(Grenade, PlayerMovement.Instance.transform, false);
-        grenade.GetComponent<Rigidbody2D>().AddForce(PlayerMovement.Instance.controller.m_Rigidbody2D.velocity);
+        GameObject grenade = Instantiate(Grenade);
+        grenade.transform.position = PlayerMovement.Instance.transform.position;
+        Rigidbody2D grenadeRb = grenade.GetComponent<Rigidbody2D>();
+        grenadeRb.AddForce(PlayerMovement.Instance.controller.m_Rigidbody2D.velocity*50);
+        grenadeRb.AddForce(PlayerMovement.Instance.transform.right * 150);
+        grenadeRb.AddForce(PlayerMovement.Instance.transform.up * 50);
     }
 
     public void SwitchPrimaryWeapon()

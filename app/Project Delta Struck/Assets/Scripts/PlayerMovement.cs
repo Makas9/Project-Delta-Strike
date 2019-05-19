@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
             GameMaster.Instance.SwitchPrimaryWeapon();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             GameMaster.Instance.ThrowGrenade();
         }
