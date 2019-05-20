@@ -30,26 +30,27 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetButtonDown("Jump"))
 		{
 			jump = true;
-			animator.SetBool("IsJumping", true);
 		}
 
-		if (Input.GetButtonDown("Crouch"))
-		{
-			crouch = true;
-		} else if (Input.GetButtonUp("Crouch"))
-		{
-			crouch = false;
-		}
-
-        if (HasFallen())
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Respawn();
+            GameMaster.Instance.SwitchPrimaryWeapon();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameMaster.Instance.ThrowGrenade();
         }
     }
 
-    public bool HasFallen()
+    public void OnJump()
     {
-        return transform.position.y < -5;
+        animator.SetTrigger("Jump");
+    }
+
+    public void OnFire()
+    {
+        animator.SetTrigger("Fire");
     }
 
     public void Respawn()
@@ -59,29 +60,17 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator LateRespawn()
     {
-        Camera2DFollow.Instance.enabled = false;
         controller.m_Rigidbody2D.freezeRotation = false;
-        animator.SetTrigger("Fall");
         yield return new WaitForSecondsRealtime(SecondsToRespawn);
         controller.m_Rigidbody2D.position = InitialPosition.position;
         if (transform.forward.x < 0)
         {
             controller.Flip();
         }
-        animator.SetTrigger("StandUp");
         controller.m_Rigidbody2D.freezeRotation = true;
-        Camera2DFollow.Instance.enabled = true;
     }
 
-    public void OnLanding ()
-	{
-		animator.SetBool("IsJumping", false);
-	}
 
-	public void OnCrouching (bool isCrouching)
-	{
-		animator.SetBool("IsCrouching", isCrouching);
-	}
 
 	void FixedUpdate ()
 	{

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Granade", menuName = "Weapon/Granade")]
+[CreateAssetMenu(fileName = "New Vest", menuName = "Weapon/vest")]
 public class VestSettings : ScriptableObject
 {
     public string Name;

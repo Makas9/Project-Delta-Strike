@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Parallax
+  - Ground
+  - EndLevelElement
   layers:
   - Default
   - TransparentFX
@@ -14,11 +16,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Enemy
+  - Collectable
+  - Grenade
   - 
   - 
   - 

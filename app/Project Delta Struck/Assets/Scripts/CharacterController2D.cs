@@ -24,12 +24,12 @@ public class CharacterController2D : MonoBehaviour
     [Header("Events")]
 	[Space]
 
-	public UnityEvent OnLandEvent;
+    public UnityEvent OnLandEvent;
+    public UnityEvent OnJumpEvent;
 
-	[System.Serializable]
+    [System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
 
-	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
    
@@ -40,9 +40,9 @@ public class CharacterController2D : MonoBehaviour
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 
-		if (OnCrouchEvent == null)
-			OnCrouchEvent = new BoolEvent();
-	}
+		if (OnJumpEvent == null)
+			OnJumpEvent = new UnityEvent();
+    }
 
 	private void FixedUpdate()
 	{
@@ -72,6 +72,7 @@ public class CharacterController2D : MonoBehaviour
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
+                print("overlapping");
 				crouch = true;
 			}
 		}
@@ -79,20 +80,19 @@ public class CharacterController2D : MonoBehaviour
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
-
 			// If crouching
 			if (crouch)
 			{
 				if (!m_wasCrouching)
 				{
 					m_wasCrouching = true;
-					OnCrouchEvent.Invoke(true);
 				}
 
 				// Reduce the speed by the crouchSpeed multiplier
 				move *= m_CrouchSpeed;
 
-				// Disable one of the colliders when crouching
+                // Disable one of the colliders when crouching
+                print("Disabling col");
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
 			} else
@@ -104,7 +104,6 @@ public class CharacterController2D : MonoBehaviour
 				if (m_wasCrouching)
 				{
 					m_wasCrouching = false;
-					OnCrouchEvent.Invoke(false);
 				}
 			}
 
@@ -129,7 +128,8 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
 		if (m_Grounded && jump)
 		{
-			// Add a vertical force to the player.
+            // Add a vertical force to the player.
+            OnJumpEvent.Invoke();
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}
@@ -141,10 +141,8 @@ public class CharacterController2D : MonoBehaviour
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
 
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+        // Multiply the player's x local scale by -1.
+        transform.Rotate(0, 180, 0);
 	}
 
 }

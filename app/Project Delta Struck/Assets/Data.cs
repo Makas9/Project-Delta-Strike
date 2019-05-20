@@ -11,11 +11,17 @@ public class Data : MonoBehaviour
     public VestSettings[] Vests;
     public GunSettings[] Guns;
     public KnifeSettings[] Knives;
+    public HalmetSettings[] Halmets;
+    public WeaponSettings PrimaryWeapon;
     public List<string> userItems = new List<string>();
     [HideInInspector]
     public PlayerData PlayerData;
     [HideInInspector]
-    public bool ItemsLoaded = false;
+    public bool UserItemsLoaded = false;
+    public bool PlayerDataLoaded = false;
+    public int LevelEnemiesKilled;
+    public int LevelCoinsCollected;
+    public bool ItemsLoaded;
 
     private void Awake()
     {
@@ -32,6 +38,8 @@ public class Data : MonoBehaviour
         //Debug.Log(JsonUtility.ToJson(Knives[0]));
         //Debug.Log(JsonUtility.ToJson(Grenades[0].stats));
     }
+
+
 
     public int GetGrenadesCount(string Name)
     {
@@ -59,6 +67,10 @@ public class Data : MonoBehaviour
     {
         AddToArray(ref Knives, settings);
     }
+    public void AddHalmet(HalmetSettings settings)
+    {
+        AddToArray(ref Halmets, settings);
+    }
 
 
     public void SetPlayerData(PlayerData data)
@@ -69,6 +81,8 @@ public class Data : MonoBehaviour
     public string CurrentVest => PlayerData.CurrentVest;
     public string CurrentGun => PlayerData.CurrentGun;
     public string CurrentKnife => PlayerData.CurrentKnife;
+    public string CurrentGrenade => PlayerData.CurrentGrenade;
+    public string CurrentHalmet => PlayerData.CurrentHalmet;
 
     public float Money
     {
@@ -110,6 +124,15 @@ public class Data : MonoBehaviour
             if (g.Name == Name) return g;
         }
         throw new Exception("Vest " + Name + " does note exit");
+    }
+
+    public HalmetSettings GetHalmetSettings(string Name)
+    {
+        foreach (HalmetSettings g in Halmets)
+        {
+            if (g.Name == Name) return g;
+        }
+        throw new Exception("Halmet " + Name + " does note exit");
     }
 
     public void AddToArray<T>(ref T[] array, T value)
