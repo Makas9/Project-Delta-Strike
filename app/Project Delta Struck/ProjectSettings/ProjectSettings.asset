@@ -618,7 +618,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: b818f121-b7d0-4b3b-8088-f88256554764
   projectName: Project Delta Struck
   organizationId: unitycosta

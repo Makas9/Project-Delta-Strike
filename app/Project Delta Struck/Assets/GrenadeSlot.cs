@@ -31,6 +31,8 @@ public class GrenadeSlot : ShopSlot
             int count = Data.Instance.GetGrenadesCount(Name);
             Data.Instance.PlayerData.AddItemToInventoryDB(Name);
             Manager.UpperRightLbl.text = count.ToString();
+            SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
+            Data.Instance.UserItemsLoaded = false;
         }
         else
         {

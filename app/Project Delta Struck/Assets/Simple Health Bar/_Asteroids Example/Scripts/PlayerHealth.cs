@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     bool canTakeDamage = true;
 
 	public int maxHealth = 100;
-	float currentHealth = 0;
+	float currentHealth = 100;
 
     float currentAmmo = 0;
 	float reloadTime = 1.0f;
@@ -31,16 +31,32 @@ public class PlayerHealth : MonoBehaviour
 
 	void Start ()
 	{
-		// Set the current health and shield to max values.
-		currentHealth = maxHealth;
+        if (!Data.Instance.ItemsLoaded)
+        {
+            SaveSystem.Instance.CallGetItems();
+        }
+        StartCoroutine(LoadDataInitBar());
+    }
+
+    IEnumerator LoadDataInitBar()
+    {
+        // Set the current health and shield to max values.
+        currentHealth = maxHealth;
         if (Data.Instance != null)
+        {
+            while (!Data.Instance.PlayerDataLoaded)
+            {
+                print("Player data not loaded");
+                yield return null;
+            }
             reloadTime = currentAmmo = Data.Instance.GetGunSettings(Data.Instance.CurrentGun).gunStats.ReloadTime;
+        }
         else
             reloadTime = currentAmmo = 0.4f;
         // Update the Simple Health Bar with the updated values of Health and Shield.
-        healthBar.UpdateBar( currentHealth, maxHealth );
-		ammoBar.UpdateBar( currentAmmo, reloadTime );
-	}
+        healthBar.UpdateBar(currentHealth, maxHealth);
+        ammoBar.UpdateBar(currentAmmo, reloadTime);
+    }
 
 	public void HealPlayer ()
 	{
@@ -55,9 +71,16 @@ public class PlayerHealth : MonoBehaviour
 		healthBar.UpdateBar( currentHealth, maxHealth );
 	}
 
-	public void TakeDamage ( int damage )
+	public void TakeDamage ( float damage )
 	{
-		currentHealth -= damage;
+        HalmetSettings halmet = Data.Instance.GetHalmetSettings(Data.Instance.CurrentHalmet);
+        VestSettings vest = Data.Instance.GetVestSettings(Data.Instance.CurrentVest);
+        print("halmet.HalmetStats.Resist: " + halmet.HalmetStats.Resistence + " " + halmet.Name);
+        print("vest.vestStats.Resistence: " + vest.vestStats.Resistence + " " + vest.Name);
+        damage -= damage * halmet.HalmetStats.Resistence;
+        damage -= damage * vest.vestStats.Resistence;
+        print("Taking damage: " + damage);
+        currentHealth -= damage;
 
 		// If the health is less than zero...
 		if( currentHealth <= 0 )
@@ -73,7 +96,7 @@ public class PlayerHealth : MonoBehaviour
 		healthBar.UpdateBar( currentHealth, maxHealth );
 	}
 
-    public bool Fire()
+    public bool CanFire()
     {
         // If the shield is less than max, and the regen cooldown is not in effect...
         if (currentAmmo == reloadTime)
@@ -81,12 +104,16 @@ public class PlayerHealth : MonoBehaviour
             StartCoroutine(ReloadBar(ammoBar));
             return true;
         }
+        print("current " + currentAmmo + " reloadtime: " + reloadTime);
         return false;
     }
 
 	public void Death ()
 	{
-	}
+        PlayerMovement.Instance.controller.m_Rigidbody2D.freezeRotation = false;
+        PlayerMovement.Instance.controller.m_Rigidbody2D.AddTorque(200);
+        GameMaster.Instance.LevelEnded(false);
+    }
 
     IEnumerator ReloadBar(SimpleHealthBar bar)
     {

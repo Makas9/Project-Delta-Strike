@@ -6,10 +6,11 @@ public class Enemy : MonoBehaviour {
     public float speed = 1f;
     public bool JustTurnedAround = false;
     public float TurnAroundDuration = 1f;
-    public int health = 100;
+    public float health = 100;
     public GameObject deathEffect;
     public float CliffDetectionDistance = 1f;
-    public int Damage = 10;
+    public float Damage = 10;
+    public int KillReward = 5;
     public Transform HealthBarLocation;
     SimpleHealthBar HealthBar;
     void Awake()
@@ -20,8 +21,9 @@ public class Enemy : MonoBehaviour {
         follow.target = transform;
         follow.yOffset = HealthBarLocation.position.y - transform.position.y;
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
+        
         health -= damage;
         HealthBar.UpdateBar(health, 100);
         if (health <= 0)
@@ -34,6 +36,7 @@ public class Enemy : MonoBehaviour {
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Data.Instance.LevelEnemiesKilled++;
+        GameMaster.Instance.AddMoney(KillReward);
         Destroy(HealthBar.transform.parent.gameObject);
         Destroy(gameObject);
     }

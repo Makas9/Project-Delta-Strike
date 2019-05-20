@@ -24,12 +24,12 @@ public class CharacterController2D : MonoBehaviour
     [Header("Events")]
 	[Space]
 
-	public UnityEvent OnLandEvent;
+    public UnityEvent OnLandEvent;
+    public UnityEvent OnJumpEvent;
 
-	[System.Serializable]
+    [System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
 
-	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
    
@@ -40,9 +40,9 @@ public class CharacterController2D : MonoBehaviour
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 
-		if (OnCrouchEvent == null)
-			OnCrouchEvent = new BoolEvent();
-	}
+		if (OnJumpEvent == null)
+			OnJumpEvent = new UnityEvent();
+    }
 
 	private void FixedUpdate()
 	{
@@ -86,7 +86,6 @@ public class CharacterController2D : MonoBehaviour
 				if (!m_wasCrouching)
 				{
 					m_wasCrouching = true;
-					OnCrouchEvent.Invoke(true);
 				}
 
 				// Reduce the speed by the crouchSpeed multiplier
@@ -105,7 +104,6 @@ public class CharacterController2D : MonoBehaviour
 				if (m_wasCrouching)
 				{
 					m_wasCrouching = false;
-					OnCrouchEvent.Invoke(false);
 				}
 			}
 
@@ -130,7 +128,8 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
 		if (m_Grounded && jump)
 		{
-			// Add a vertical force to the player.
+            // Add a vertical force to the player.
+            OnJumpEvent.Invoke();
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}

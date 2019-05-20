@@ -15,7 +15,8 @@ public class Goal : MonoBehaviour {
         if (!col.transform.CompareTag("Player")) return;
         reached = true;
         int scene = int.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name) +1;
+        Data.Instance.PlayerData.LevelReached = scene;
         SaveSystem.Instance.SavePlayer(Data.Instance.PlayerData);
-        SceneFader.Instance.FadeTo(scene.ToString());
+        GameMaster.Instance.LevelEnded(true);
     }
 }

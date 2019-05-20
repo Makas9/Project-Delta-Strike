@@ -26,14 +26,15 @@ public class UserManager : MonoBehaviour {
     IEnumerator Login()
     {
         WWWForm form = new WWWForm();
+        print(usernameField.text);
         form.AddField("username", usernameField.text);
         form.AddField("password", passwordField.text);
-        WWW www = new WWW("http://u484157030.hostingerapp.com/login.php", form);
+        WWW www = new WWW("http://mart13s.lt/login.php", form);
         yield return www;
         if (www.text.StartsWith("Valid"))
         {
             DBManager.username = usernameField.text;
-            SaveSystem.Instance.LoadPlayer();
+            SaveSystem.Instance.CallGetItems();
             SceneFader.Instance.FadeTo("MainMenu");
         }
         else
