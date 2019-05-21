@@ -668,12 +668,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1092327495707376, guid: ad78752563fee8949889bf106f8cbba6, type: 2}
       propertyPath: m_Name
-      value: HalmetsShop
+      value: HelmetsShop
       objectReference: {fileID: 0}
     - target: {fileID: 114277841566631474, guid: ad78752563fee8949889bf106f8cbba6,
         type: 2}
       propertyPath: m_Text
-      value: Halmets
+      value: Helmets
       objectReference: {fileID: 0}
     - target: {fileID: 114302716021359596, guid: ad78752563fee8949889bf106f8cbba6,
         type: 2}

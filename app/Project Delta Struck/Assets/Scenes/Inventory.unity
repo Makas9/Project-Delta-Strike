@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 41349417}
   - component: {fileID: 41349416}
   m_Layer: 5
-  m_Name: HalmetsShopBtn
+  m_Name: HelmetsShopBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1586,7 +1586,7 @@ GameObject:
   - component: {fileID: 793461189}
   - component: {fileID: 793461188}
   m_Layer: 5
-  m_Name: HalmetsScrollRect
+  m_Name: HelmetsScrollRect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1856,7 +1856,7 @@ Prefab:
     - target: {fileID: 114525315461397942, guid: addb9a56fab68574aa41f501708b1bc3,
         type: 2}
       propertyPath: m_Text
-      value: Halmets
+      value: Helmets
       objectReference: {fileID: 0}
     - target: {fileID: 114759637029382336, guid: addb9a56fab68574aa41f501708b1bc3,
         type: 2}
@@ -3025,7 +3025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GO TO HALMETS SHOP
+  m_Text: GO TO HELMETS SHOP
 --- !u!222 &1534404077
 CanvasRenderer:
   m_ObjectHideFlags: 0
