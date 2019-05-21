@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
+    public static List<Enemy> Enemies = null;
     public float speed = 1f;
     public bool JustTurnedAround = false;
     public float TurnAroundDuration = 1f;
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour {
     SimpleHealthBar HealthBar;
     void Awake()
     {
+        if (Enemies == null) Enemies = new List<Enemy>();
+        Enemies.Add(this);
         GameObject Bar = Instantiate(GameMaster.Instance.SimpleBarPrefab, GameMaster.Instance.GameCanvas.transform);
         HealthBar = Bar.transform.Find("Fill").GetComponent<SimpleHealthBar>();
         ScreenWorldFollow follow = Bar.GetComponent<ScreenWorldFollow>();
@@ -32,7 +35,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    void Die()
+    public void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Data.Instance.LevelEnemiesKilled++;
@@ -45,6 +48,11 @@ public class Enemy : MonoBehaviour {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         DetectCliff();
 
+    }
+
+    private void OnDestroy()
+    {
+        Enemies.Remove(this);
     }
     public void DetectCliff()
     {
