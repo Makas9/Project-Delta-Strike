@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void TurnOffControls()
     {
+        animator.SetFloat("Speed", 0);
         animator.enabled = false;
         enabled = false;
     }

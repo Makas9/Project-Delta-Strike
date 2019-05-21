@@ -48,6 +48,12 @@ public class SceneFader : MonoBehaviour {
         }
     }
 
+    public void FadeToLevelReached()
+    {
+        int level = Data.Instance.PlayerData.LevelReached;
+        FadeTo(level.ToString());
+    }
+
     IEnumerator FadeIn ()
 	{
         float t = curve.keys[curve.keys.Length - 1].value;

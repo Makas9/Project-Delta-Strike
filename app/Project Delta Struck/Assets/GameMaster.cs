@@ -86,6 +86,7 @@ public class GameMaster : MonoBehaviour {
             {
                 PrefabSpawner.Instance.enabled = false;
             }
+            PlayerMovement.Instance.controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
         else
         {

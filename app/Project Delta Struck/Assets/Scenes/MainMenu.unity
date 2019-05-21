@@ -2140,7 +2140,7 @@ Prefab:
     - target: {fileID: 114060928899895044, guid: 893c715685957b54cb6195895eaa34c2,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114060928899895044, guid: 893c715685957b54cb6195895eaa34c2,
         type: 2}
@@ -2155,7 +2155,7 @@ Prefab:
     - target: {fileID: 114060928899895044, guid: 893c715685957b54cb6195895eaa34c2,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FadeTo
+      value: FadeToLevelReached
       objectReference: {fileID: 0}
     - target: {fileID: 114060928899895044, guid: 893c715685957b54cb6195895eaa34c2,
         type: 2}
