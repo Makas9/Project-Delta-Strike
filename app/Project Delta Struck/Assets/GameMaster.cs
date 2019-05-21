@@ -18,6 +18,7 @@ public class GameMaster : MonoBehaviour {
     public EnableQueue EndLevelElements;
     public GameObject nextLevelBtn;
     public GameObject Grenade;
+    public bool GameHasEnded = false;
     // Use this for initialization
     void Awake () {
         Instance = this;
@@ -72,9 +73,20 @@ public class GameMaster : MonoBehaviour {
     /// <param name="win">Was the level failed or won</param>
     public void LevelEnded(bool win)
     {
+        if (GameHasEnded) return;
         if (win)
         {
             Title.text = "Level completed";
+
+            foreach (Enemy e in Enemy.Enemies)
+            {
+                e.Die();
+            }
+            if (PrefabSpawner.Instance != null)
+            {
+                PrefabSpawner.Instance.enabled = false;
+            }
+            PlayerMovement.Instance.controller.m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
         else
         {
@@ -85,6 +97,9 @@ public class GameMaster : MonoBehaviour {
         CoinsCollected.Value = Data.Instance.LevelCoinsCollected;
         endLevelUI.SetActive(true);
         EndLevelElements.StartEnabling();
+
+        PlayerMovement.Instance.TurnOffControls();
+        GameHasEnded = true;
     }
     public bool gameIsPaused = false;
     public void Pause()

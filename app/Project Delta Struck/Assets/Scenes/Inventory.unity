@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 41349417}
   - component: {fileID: 41349416}
   m_Layer: 5
-  m_Name: HalmetsShopBtn
+  m_Name: HelmetsShopBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,9 +310,9 @@ RectTransform:
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.1}
-  m_AnchoredPosition: {x: -0.000091552734, y: 5}
-  m_SizeDelta: {x: -20, y: -10}
+  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchoredPosition: {x: -0.000091552734, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &41349416
 MonoBehaviour:
@@ -1349,9 +1349,9 @@ RectTransform:
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 5}
-  m_SizeDelta: {x: -20, y: -10}
+  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &594635389
 MonoBehaviour:
@@ -1586,7 +1586,7 @@ GameObject:
   - component: {fileID: 793461189}
   - component: {fileID: 793461188}
   m_Layer: 5
-  m_Name: HalmetsScrollRect
+  m_Name: HelmetsScrollRect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1856,7 +1856,7 @@ Prefab:
     - target: {fileID: 114525315461397942, guid: addb9a56fab68574aa41f501708b1bc3,
         type: 2}
       propertyPath: m_Text
-      value: Halmets
+      value: Helmets
       objectReference: {fileID: 0}
     - target: {fileID: 114759637029382336, guid: addb9a56fab68574aa41f501708b1bc3,
         type: 2}
@@ -2008,10 +2008,10 @@ RectTransform:
   m_Father: {fileID: 127938637}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.1}
+  m_AnchorMin: {x: 0, y: 0.2}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: -20, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036231266
 MonoBehaviour:
@@ -2343,9 +2343,9 @@ RectTransform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 5}
-  m_SizeDelta: {x: -20, y: -10}
+  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1151776861
 MonoBehaviour:
@@ -2466,9 +2466,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 5}
-  m_SizeDelta: {x: -20, y: -10}
+  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1184005129
 MonoBehaviour:
@@ -2698,9 +2698,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 5}
-  m_SizeDelta: {x: -20, y: -10}
+  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1385745002
 MonoBehaviour:
@@ -3025,7 +3025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GO TO HALMETS SHOP
+  m_Text: GO TO HELMETS SHOP
 --- !u!222 &1534404077
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4050,7 +4050,7 @@ MonoBehaviour:
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 38439261}
+  m_Viewport: {fileID: 2032095667}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
   m_HorizontalScrollbarVisibility: 0

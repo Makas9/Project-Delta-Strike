@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (GameMaster.Instance.GameHasEnded) return;
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -41,6 +42,13 @@ public class PlayerMovement : MonoBehaviour {
         {
             GameMaster.Instance.ThrowGrenade();
         }
+    }
+
+    public void TurnOffControls()
+    {
+        animator.SetFloat("Speed", 0);
+        animator.enabled = false;
+        enabled = false;
     }
 
     public void OnJump()
